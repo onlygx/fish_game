@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.elangzhi.fish.dao.GradeMapper" >
+  <resultMap id="BaseResultMap" type="com.elangzhi.fish.model.Grade" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="person_id" property="personId" jdbcType="BIGINT" />
+    <result column="game_id" property="gameId" jdbcType="BIGINT" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="chang" property="chang" jdbcType="INTEGER" />
+    <result column="qu" property="qu" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="DOUBLE" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
+    <result column="ranking" property="ranking" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, person_id, game_id, `time`, chang, qu, `number`, weight, grade, ranking
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from grade
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from grade
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.elangzhi.fish.model.Grade" >
+    insert into grade (id, person_id, game_id, 
+      `time`, chang, qu, 
+      `number`, weight, grade, 
+      ranking)
+    values (#{id,jdbcType=BIGINT}, #{personId,jdbcType=BIGINT}, #{gameId,jdbcType=BIGINT}, 
+      #{time,jdbcType=TIMESTAMP}, #{chang,jdbcType=INTEGER}, #{qu,jdbcType=INTEGER}, 
+      #{number,jdbcType=INTEGER}, #{weight,jdbcType=DOUBLE}, #{grade,jdbcType=INTEGER}, 
+      #{ranking,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elangzhi.fish.model.Grade" >
+    insert into grade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="personId != null" >
+        person_id,
+      </if>
+      <if test="gameId != null" >
+        game_id,
+      </if>
+      <if test="time != null" >
+        `time`,
+      </if>
+      <if test="chang != null" >
+        chang,
+      </if>
+      <if test="qu != null" >
+        qu,
+      </if>
+      <if test="number != null" >
+        `number`,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="ranking != null" >
+        ranking,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="personId != null" >
+        #{personId,jdbcType=BIGINT},
+      </if>
+      <if test="gameId != null" >
+        #{gameId,jdbcType=BIGINT},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chang != null" >
+        #{chang,jdbcType=INTEGER},
+      </if>
+      <if test="qu != null" >
+        #{qu,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="ranking != null" >
+        #{ranking,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elangzhi.fish.model.Grade" >
+    update grade
+    <set >
+      <if test="personId != null" >
+        person_id = #{personId,jdbcType=BIGINT},
+      </if>
+      <if test="gameId != null" >
+        game_id = #{gameId,jdbcType=BIGINT},
+      </if>
+      <if test="time != null" >
+        `time` = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="chang != null" >
+        chang = #{chang,jdbcType=INTEGER},
+      </if>
+      <if test="qu != null" >
+        qu = #{qu,jdbcType=INTEGER},
+      </if>
+      <if test="number != null" >
+        `number` = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=DOUBLE},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="ranking != null" >
+        ranking = #{ranking,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elangzhi.fish.model.Grade" >
+    update grade
+    set person_id = #{personId,jdbcType=BIGINT},
+      game_id = #{gameId,jdbcType=BIGINT},
+      `time` = #{time,jdbcType=TIMESTAMP},
+      chang = #{chang,jdbcType=INTEGER},
+      qu = #{qu,jdbcType=INTEGER},
+      `number` = #{number,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=DOUBLE},
+      grade = #{grade,jdbcType=INTEGER},
+      ranking = #{ranking,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
