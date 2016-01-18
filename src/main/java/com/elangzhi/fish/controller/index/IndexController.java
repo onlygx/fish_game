@@ -19,11 +19,9 @@ import java.util.Date;
 //@RequestMapping("/")
 public class IndexController {
 
-    @RequestMapping("/")
-    public ModelAndView showCall(@PathVariable String name,HttpServletRequest request,ModelMap model){
-        model.addAttribute("date", new Date());
-        model.addAttribute("name", name);
-        model.addAttribute("adminJson", "json content");
+    @RequestMapping("/game")
+    public ModelAndView showCall(HttpServletRequest request,ModelMap model){
+        model.put("indexTest","结果1");
         return new ModelAndView("index",model);
     }
 
