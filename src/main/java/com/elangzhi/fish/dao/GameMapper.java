@@ -5,9 +5,9 @@ import com.elangzhi.fish.model.Game;
 public interface GameMapper {
     int deleteByPrimaryKey(Long id);
 
-    int insert(Game record);
+    Long insert(Game record);
 
-    int insertSelective(Game record);
+    Long insertSelective(Game record);
 
     Game selectByPrimaryKey(Long id);
 

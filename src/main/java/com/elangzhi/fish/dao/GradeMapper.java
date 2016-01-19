@@ -5,9 +5,9 @@ import com.elangzhi.fish.model.Grade;
 public interface GradeMapper {
     int deleteByPrimaryKey(Long id);
 
-    int insert(Grade record);
+    Long insert(Grade record);
 
-    int insertSelective(Grade record);
+    Long insertSelective(Grade record);
 
     Grade selectByPrimaryKey(Long id);
 

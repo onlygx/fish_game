@@ -125,4 +125,14 @@
       game_id = #{gameId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="listByGame" resultMap="BaseResultMap">
+    select a.*
+    from person a
+    where 1=1
+    <if test="gameId != null" >
+      and a.`game_id` = #{gameId,jdbcType=BIGINT}
+    </if>
+  </select>
+
 </mapper>
