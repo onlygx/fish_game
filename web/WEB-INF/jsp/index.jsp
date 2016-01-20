@@ -41,7 +41,7 @@
         <table style="width: 100%;text-align: center;" align="center">
             <tr>
                 <td align="center">
-                    <a class="btn btn-info" href="/game/setting">赛事设置</a>
+                    <a class="btn btn-info" href="/game/setting" target="_blank">赛事设置</a>
                 </td>
                 <td align="center">
                     <button class="btn btn-success" onclick="">报名检入</button>

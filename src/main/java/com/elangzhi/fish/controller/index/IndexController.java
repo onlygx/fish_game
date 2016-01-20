@@ -1,12 +1,15 @@
 package com.elangzhi.fish.controller.index;
 
 import com.elangzhi.fish.controller.json.Tip;
+import com.elangzhi.fish.services.GameService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -20,6 +23,7 @@ public class IndexController {
     @RequestMapping("/game")
     public ModelAndView showCall(HttpServletRequest request,ModelMap model){
         model.put("indexTest","结果1");
+        model.put("game",gameService.findNew());
         return new ModelAndView("index",model);
     }
 
@@ -32,4 +36,6 @@ public class IndexController {
         return new Tip();
     }
 
+    @Resource
+    GameService gameService;
 }

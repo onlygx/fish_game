@@ -15,6 +15,8 @@ public class Person {
 
     private String intro;
 
+    private String group;
+
     private Long gameId;
 
     public Long getId() {
@@ -79,5 +81,13 @@ public class Person {
 
     public void setGameId(Long gameId) {
         this.gameId = gameId;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 }

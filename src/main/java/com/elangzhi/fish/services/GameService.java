@@ -9,4 +9,9 @@ import java.util.List;
  */
 public interface GameService extends BaseService<Game> {
 
+    /**
+     * 根据时间获取最新的比赛
+     * @return
+     */
+    Game findNew();
 }

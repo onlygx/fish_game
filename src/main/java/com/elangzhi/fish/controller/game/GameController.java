@@ -20,16 +20,35 @@ public class GameController {
 
     @RequestMapping("/setting")
     public ModelAndView setting(ModelMap model){
-        model.put("game",gameService.findById(888888l));
+        model.put("game",gameService.findNew());
         return new ModelAndView("game/setting",model);
     }
 
+    @RequestMapping("/save")
+    @ResponseBody
+    public Tip save(Game game){
+
+        try {
+            gameService.save(game);
+            return new Tip();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Tip(1);
+        }
+
+    }
 
     @RequestMapping("/update")
     @ResponseBody
     public Tip update(Game game){
-        gameService.updateById(game);
-        return new Tip();
+
+        try {
+            gameService.updateById(game);
+            return new Tip();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Tip(1);
+        }
     }
 
     // --- service ---------

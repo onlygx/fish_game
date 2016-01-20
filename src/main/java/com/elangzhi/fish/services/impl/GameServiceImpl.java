@@ -6,7 +6,6 @@ import com.elangzhi.fish.services.GameService;
 import com.elangzhi.fish.services.PersonService;
 import com.elangzhi.fish.tools.UUIDFactory;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +25,9 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public Long save(Game game) {
-        return null;
+        game.setId(UUIDFactory.getLongId());
+        game.setTime(new Date());
+        return gameMapper.insertSelective(game);
     }
 
     @Override
@@ -41,9 +42,16 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public Integer updateById(Game game) {
-        return gameMapper.updateByPrimaryKey(game);
+        return gameMapper.updateByPrimaryKeySelective(game);
     }
 
 
-
+    @Override
+    public Game findNew() {
+        List<Game> list = gameMapper.list();
+        if(list != null && list.size() > 0){
+            return list.get(0);
+        }
+        return null;
+    }
 }

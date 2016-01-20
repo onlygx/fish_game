@@ -42,7 +42,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Integer updateById(Person person) {
-        return personMapper.updateByPrimaryKey(person);
+        return personMapper.updateByPrimaryKeySelective(person);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.elangzhi.fish.dao;
 
 import com.elangzhi.fish.model.Game;
 
+import java.util.List;
+
 public interface GameMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,6 @@ public interface GameMapper {
     int updateByPrimaryKeySelective(Game record);
 
     int updateByPrimaryKey(Game record);
+
+    List<Game> list();
 }

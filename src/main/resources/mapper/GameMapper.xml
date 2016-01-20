@@ -125,4 +125,9 @@
       intro = #{intro,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="list" resultMap="BaseResultMap" >
+      select *
+      from game
+      order by `time` desc
+  </select>
 </mapper>
