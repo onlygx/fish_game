@@ -119,7 +119,7 @@
             </div>
         </div>
     </form>
-    <table style="width: 100%;" class="table table-bordered">
+    <table style="width: 100%;" class="table table-striped table-bordered">
         <tr>
             <th>姓名</th>
             <th>电话</th>
@@ -135,15 +135,16 @@
 </body>
 </html>
 <script>
-    function update(){
-        var param = tools.formParams("gameParam");
+    function savePerson(){
+        var param = tools.formParams("personParam");
         tools.action("/person/save",param,function(data){
             tools.tip(data,{1:"操作失败！"});
+            location.reload();
         });
     }
 
-    function savePerson(){
-        var param = tools.formParams("personParam");
+    function update(){
+        var param = tools.formParams("gameParam");
         tools.action("/game/update",param,function(data){
             tools.tip(data,{1:"操作失败！"});
         });
