@@ -39,4 +39,8 @@ public class GradeServiceImpl implements GradeService {
     }
 
 
+    @Override
+    public List<Grade> findInfo1(Long gameId, Integer chang, Integer qu) {
+        return gradeMapper.findInfo1(gameId,chang,qu);
+    }
 }

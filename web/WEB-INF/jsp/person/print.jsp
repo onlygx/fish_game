@@ -33,7 +33,7 @@
             <div id="erweima"></div>
         </div>
         <div class="col-md-9">
-            <h3>编号：${obj.id}</h3>
+            <h3>编号：${obj.number}</h3>
             <h3>姓名：${obj.name}</h3>
             <h3>简介：${obj.intro}</h3>
         </div>

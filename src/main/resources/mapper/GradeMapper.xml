@@ -149,4 +149,18 @@
       ranking = #{ranking,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="findInfo1" resultMap="BaseResultMap">
+    select a.*,b.`name` personName
+    from grade a
+    left join person b on a.person_id = b.id
+    where 1=1
+    and a.game_id = #{gameId,jdbcType=BIGINT}
+    and a.chang = #{chang,jdbcType=INTEGER}
+    <if test="qu != null" >
+        and a.`qu` = #{qu,jdbcType=INTEGER}
+    </if>
+    order by a.number desc,a.weight desc
+  </select>
 </mapper>

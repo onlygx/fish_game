@@ -61,4 +61,9 @@ public class PersonServiceImpl implements PersonService {
 
         return personMapper.listByGameType(id,i);
     }
+
+    @Override
+    public Person findNewNumber(Long gameId) {
+        return personMapper.findNewNumber(gameId);
+    }
 }

@@ -83,6 +83,7 @@
 
     <table style="width: 100%;" class="table table-striped table-bordered">
         <tr>
+            <th>编号</th>
             <th>姓名</th>
             <th>电话</th>
             <th>地址</th>
@@ -93,6 +94,7 @@
         </tr>
         <c:forEach var="item" items="${persons}" varStatus="status">
             <tr>
+                <td>${item.number}</td>
                 <td>${item.name}</td>
                 <td>${item.phone}</td>
                 <td>${item.address}</td>
@@ -115,7 +117,14 @@
         var param = tools.formParams("personParam");
         tools.action("/person/save", param, function (data) {
             tools.tip(data, {1: "操作失败！"});
-            location.reload();
+            if(data.success){
+                if(confirm("是否打印？")){
+                    location.href="/person/print/"+data.data;
+                }else{
+                    location.reload();
+                }
+            }
+
         });
     }
 

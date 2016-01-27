@@ -25,7 +25,7 @@ import java.util.List;
 public class GradeController {
 
     @RequestMapping("/show/{gameId}/{chang}/{qu}")
-    public ModelAndView show1(@PathVariable Long gameId,@PathVariable Long chang,@PathVariable Long qu,ModelMap model){
+    public ModelAndView show1(@PathVariable Long gameId,@PathVariable Integer chang,@PathVariable Integer qu,ModelMap model){
         Game game = gameService.findById(gameId);
         model.put("game",game);
         model.put("chang",chang);
@@ -35,7 +35,7 @@ public class GradeController {
     }
 
     @RequestMapping("/show/{gameId}/{chang}")
-    public ModelAndView show2(@PathVariable Long gameId,@PathVariable Long chang,ModelMap model){
+    public ModelAndView show2(@PathVariable Long gameId,@PathVariable Integer chang,ModelMap model){
         Game game = gameService.findById(gameId);
         model.put("game",game);
         model.put("chang",chang);
@@ -44,21 +44,21 @@ public class GradeController {
     }
 
     @RequestMapping("/info/{gameId}/{chang}/{qu}")
-    public ModelAndView info1(@PathVariable Long gameId,@PathVariable Long chang,@PathVariable Long qu,ModelMap model){
+    public ModelAndView info1(@PathVariable Long gameId,@PathVariable Integer chang,@PathVariable Integer qu,ModelMap model){
         Game game = gameService.findById(gameId);
         model.put("game",game);
         model.put("chang",chang);
         model.put("qu",qu);
-
+        model.put("grades",gradeService.findInfo1(gameId,chang,qu));
         return new ModelAndView("grade/info",model);
     }
 
     @RequestMapping("/info/{gameId}/{chang}")
-    public ModelAndView info2(@PathVariable Long gameId,@PathVariable Long chang,ModelMap model){
+    public ModelAndView info2(@PathVariable Long gameId,@PathVariable Integer chang,ModelMap model){
         Game game = gameService.findById(gameId);
         model.put("game",game);
         model.put("chang",chang);
-
+        model.put("grades",gradeService.findInfo1(gameId,chang,null));
         return new ModelAndView("grade/info",model);
     }
 

@@ -167,6 +167,7 @@
     <if test="type != null" >
       and a.`type` != #{type,jdbcType=INTEGER}
     </if>
+    order by number desc
   </select>
 
   <select id="listByGameType" resultMap="BaseResultMap">
@@ -179,6 +180,17 @@
     <if test="type != null" >
       and a.`type` = #{type,jdbcType=INTEGER}
     </if>
+
+    order by number desc
+  </select>
+
+  <select id="findNewNumber" resultMap="BaseResultMap">
+    select a.*
+    from person a
+    where 1=1
+    and a. `game_id` = #{gameId,jdbcType=BIGINT}
+    order by number desc
+    limit 0,1
   </select>
 
 

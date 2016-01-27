@@ -23,4 +23,6 @@ public interface PersonMapper {
     List<Person> listExcludePersonTypeByGame(@Param("gameId") Long gameId,@Param("type") Integer type);
 
     List<Person> listByGameType(@Param("gameId") Long gameId,@Param("type") Integer type);
+
+    Person findNewNumber(Long gameId);
 }

@@ -56,7 +56,7 @@
                     <button class="btn btn-success"  data-toggle="modal" data-target="#myModal2"  onclick="">成绩打印</button>
                 </td>
                 <td align="center">
-                    <button class="btn btn-info" onclick="" >幸运抽奖</button>
+                    <a class="btn btn-info" href="/person/lucky/${game.id}" target="_blank">幸运抽奖</a>
                 </td>
             </tr>
         </table>

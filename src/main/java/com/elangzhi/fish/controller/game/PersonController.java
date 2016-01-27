@@ -33,16 +33,34 @@ public class PersonController {
         return new ModelAndView("person/setting",model);
     }
 
+
     @RequestMapping("/save")
     @ResponseBody
     public Tip save(Person person){
         try {
-            personService.save(person);
-            return new Tip();
+            person.setNumber(genNumber(personService.findNewNumber(person.getGameId())));
+            Long id = personService.save(person);
+            return new Tip(id.toString());
         } catch (Exception e) {
             e.printStackTrace();
             return new Tip(1);
         }
+    }
+
+    public Integer genNumber(Person old){
+        if(old == null){
+            return 1001;
+        }else{
+            return old.getNumber() + 1;
+        }
+    }
+
+    @RequestMapping("/lucky/{id}")
+    public ModelAndView lucky(@PathVariable Long id, HttpServletRequest request, ModelMap model){
+
+        model.put("persons",personService.listByGame(id));
+
+        return new ModelAndView("person/lucky",model);
     }
 
     @RequestMapping("/{id}")

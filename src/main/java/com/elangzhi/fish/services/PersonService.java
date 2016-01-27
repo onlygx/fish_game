@@ -31,4 +31,11 @@ public interface PersonService extends BaseService<Person> {
      * @return
      */
     List<Person> listByGameType(Long id, int i);
+
+    /**
+     * 获取最新的number
+     * @return
+     * @param gameId
+     */
+    Person findNewNumber(Long gameId);
 }

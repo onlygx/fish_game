@@ -23,6 +23,18 @@ public class Grade {
 
     private Integer ranking;
 
+
+    //-------------
+    private String personName;
+
+    public String getPersonName() {
+        return personName;
+    }
+
+    public void setPersonName(String personName) {
+        this.personName = personName;
+    }
+
     public Long getId() {
         return id;
     }

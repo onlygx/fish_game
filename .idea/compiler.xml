@@ -19,15 +19,17 @@
       </profile>
       <profile default="false" name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="fish_game" />
         <module name="ssm" />
         <module name="ssmService1.0" />
         <module name="weekend" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
+      <module name="fish_game" target="1.8" />
       <module name="ssm" target="1.8" />
       <module name="ssmService1.0" target="1.8" />
       <module name="weekend" target="1.8" />
