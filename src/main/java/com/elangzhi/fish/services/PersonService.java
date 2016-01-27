@@ -16,4 +16,19 @@ public interface PersonService extends BaseService<Person> {
      * @return
      */
     List<Person> listByGame(Long gameId);
+
+    /**
+     * 排除某个分类获取全部
+     * @param type
+     * @return
+     */
+    List<Person> listExcludePersonTypeByGame(Long gameId,Integer type);
+
+    /**
+     * 获取某个分类所有人员
+     * @param id
+     * @param i
+     * @return
+     */
+    List<Person> listByGameType(Long id, int i);
 }

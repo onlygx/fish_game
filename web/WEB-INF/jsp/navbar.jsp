@@ -29,7 +29,7 @@
             </ul>--%>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">钓鱼是个技术活儿</a></li>
+                <li><a href="#">服务器地址：192.168.23.1</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

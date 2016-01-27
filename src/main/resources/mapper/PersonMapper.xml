@@ -5,6 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
@@ -13,7 +14,7 @@
     <result column="game_id" property="gameId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, `name`, `type`, phone, address, price, intro,`group`, game_id
+    id, `name`, `type`,number, phone, address, price, intro,`group`, game_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -26,10 +27,10 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.elangzhi.fish.model.Person" >
-    insert into person (id, `name`, `type`, 
+    insert into person (id, `name`, `type`, number,
       phone, address, price, 
       intro, game_id,`group`)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},  #{number,jdbcType=INTEGER},
       #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
       #{intro,jdbcType=VARCHAR}, #{gameId,jdbcType=BIGINT},#{group,jdbcType=VARCHAR})
   </insert>
@@ -44,6 +45,9 @@
       </if>
       <if test="type != null" >
         `type`,
+      </if>
+      <if test="number != null" >
+        `number`,
       </if>
       <if test="phone != null" >
         phone,
@@ -74,6 +78,9 @@
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
       </if>
+      <if test="number != null" >
+        #{number,jdbcType=INTEGER},
+      </if>
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
       </if>
@@ -103,6 +110,9 @@
       <if test="type != null" >
         `type` = #{type,jdbcType=INTEGER},
       </if>
+      <if test="number != null" >
+        `number` = #{number,jdbcType=INTEGER},
+      </if>
       <if test="phone != null" >
         phone = #{phone,jdbcType=VARCHAR},
       </if>
@@ -128,6 +138,7 @@
     update person
     set `name` = #{name,jdbcType=VARCHAR},
       `type` = #{type,jdbcType=INTEGER},
+      `number` = #{number,jdbcType=INTEGER},
       phone = #{phone,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       price = #{price,jdbcType=DOUBLE},
@@ -145,5 +156,30 @@
       and a.`game_id` = #{gameId,jdbcType=BIGINT}
     </if>
   </select>
+
+  <select id="listExcludePersonTypeByGame" resultMap="BaseResultMap">
+    select a.*
+    from person a
+    where 1=1
+    <if test="gameId != null" >
+      and a.`game_id` = #{gameId,jdbcType=BIGINT}
+    </if>
+    <if test="type != null" >
+      and a.`type` != #{type,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <select id="listByGameType" resultMap="BaseResultMap">
+    select a.*
+    from person a
+    where 1=1
+    <if test="gameId != null" >
+      and a.`game_id` = #{gameId,jdbcType=BIGINT}
+    </if>
+    <if test="type != null" >
+      and a.`type` = #{type,jdbcType=INTEGER}
+    </if>
+  </select>
+
 
 </mapper>

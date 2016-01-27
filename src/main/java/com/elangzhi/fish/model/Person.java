@@ -5,7 +5,21 @@ public class Person {
 
     private String name;
 
+    /**
+     <option value="1">组委会主席</option>
+     <option value="2">主任仲裁员</option>
+     <option value="3">总裁判长</option>
+     <option value="4">副总裁判长</option>
+     <option value="5">成统裁判长</option>
+     <option value="6">成统裁判员</option>
+     <option value="7">分区裁判长</option>
+     <option value="8">分区裁判员</option>
+     <option value="9">助理裁判员</option>
+     <option value="20">参赛人员</option>
+     */
     private Integer type;
+
+    private Integer number;
 
     private String phone;
 
@@ -18,6 +32,14 @@ public class Person {
     private String group;
 
     private Long gameId;
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 
     public Long getId() {
         return id;

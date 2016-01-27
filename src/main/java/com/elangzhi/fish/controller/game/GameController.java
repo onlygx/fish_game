@@ -2,13 +2,17 @@ package com.elangzhi.fish.controller.game;
 
 import com.elangzhi.fish.controller.json.Tip;
 import com.elangzhi.fish.model.Game;
+import com.elangzhi.fish.model.Person;
 import com.elangzhi.fish.services.GameService;
+import com.elangzhi.fish.services.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by GaoXiang on 2016/1/19 0019.
@@ -20,8 +24,20 @@ public class GameController {
 
     @RequestMapping("/setting")
     public ModelAndView setting(ModelMap model){
-        model.put("game",gameService.findNew());
+        Game game = gameService.findNew();
+        model.put("game",game);
+        if(game != null){
+            List<Person> persons = personService.listExcludePersonTypeByGame(game.getId(),20);
+            model.put("persons",persons);
+        }
         return new ModelAndView("game/setting",model);
+    }
+
+    @RequestMapping("/show/{id}")
+    public ModelAndView show(@PathVariable Long id, ModelMap model){
+        Game game = gameService.findById(id);
+        model.put("game",game);
+        return new ModelAndView("game/down",model);
     }
 
     @RequestMapping("/save")
@@ -54,4 +70,7 @@ public class GameController {
     // --- service ---------
     @Resource
     GameService gameService;
+
+    @Resource
+    PersonService personService;
 }

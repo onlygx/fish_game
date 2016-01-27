@@ -14,4 +14,5 @@ public interface GameService extends BaseService<Game> {
      * @return
      */
     Game findNew();
+
 }

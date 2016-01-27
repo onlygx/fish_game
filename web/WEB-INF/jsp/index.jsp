@@ -27,7 +27,7 @@
     <script src="/static/js/datatables.min.js"></script>
     <script src="/static/js/tools.js"></script>
 </head>
-<body style="background-image: url('/images/index-background.jpg')">
+<body  class="body-bg">
 <jsp:include page="navbar.jsp"></jsp:include>
 
 <div class="container" >
@@ -44,22 +44,19 @@
                     <a class="btn btn-info" href="/game/setting" target="_blank">赛事设置</a>
                 </td>
                 <td align="center">
-                    <button class="btn btn-success" onclick="">报名检入</button>
+                    <a class="btn btn-success" href="/person/setting" target="_blank">报名检入</a>
                 </td>
                 <td align="center">
-                    <button class="btn btn-warning" onclick="">开始抽签</button>
+                    <a class="btn btn-warning" href="/game/show/${game.id}" target="_blank">下载比赛</a>
                 </td>
                 <td align="center">
                     <button class="btn btn-primary"  data-toggle="modal" data-target="#myModal"  onclick="">制表打印</button>
                 </td>
                 <td align="center">
-                    <button class="btn btn-danger" onclick="">成绩导入</button>
+                    <button class="btn btn-success"  data-toggle="modal" data-target="#myModal2"  onclick="">成绩打印</button>
                 </td>
                 <td align="center">
-                    <button class="btn btn-success" onclick="">成绩打印</button>
-                </td>
-                <td align="center">
-                    <button class="btn btn-info" onclick="">幸运抽奖</button>
+                    <button class="btn btn-info" onclick="" >幸运抽奖</button>
                 </td>
             </tr>
         </table>
@@ -74,18 +71,103 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">功能</h4>
+                <h4 class="modal-title" id="myModalLabel">制表打印</h4>
             </div>
             <div class="modal-body">
                 <div>
-                    <h1>
+                    <table style="width: 100%;" class="table table-striped table-bordered">
+                        <tr>
+                            <th align="center">场/区</th>
+                            <c:forEach var="item1" varStatus="status1" begin="1" end="${game.qu}">
+                                <th align="center"> 第 ${status1.index} 区</th>
+                            </c:forEach>
+                        </tr>
+                        <c:forEach var="item1" varStatus="status1" begin="1" end="${game.chang}">
+                            <tr>
+                                <td align="center">
+                                    <a href="/grade/info/${game.id}/${status1.index}" target="_blank">第 ${status1.index} 场</a>
+                                </td>
+                                <c:forEach var="item2" varStatus="status2" begin="1" end="${game.qu}">
+                                    <td align="center">
+                                        <a href="/grade/info/${game.id}/${status1.index}/${status2.index}" target="_blank">查看</a>
+                                    </td>
+                                </c:forEach>
+                            </tr>
+                        </c:forEach>
+                    </table>
 
-                    </h1>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel2">成绩打印</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <fieldset>
+                        <legend>个人排名</legend>
+                    </fieldset>
+                    <table style="width: 100%;" class="table table-striped table-bordered">
+                        <tr>
+                            <th align="center">场/区</th>
+                            <c:forEach var="item1" varStatus="status1" begin="1" end="${game.qu}">
+                                <th align="center"> 第 ${status1.index} 区</th>
+                            </c:forEach>
+                        </tr>
+                        <c:forEach var="item1" varStatus="status1" begin="1" end="${game.chang}">
+                            <tr>
+                                <td align="center">
+                                    <a href="/grade/show/${game.id}/${status1.index}" target="_blank">第 ${status1.index} 场</a>
+                                </td>
+                                <c:forEach var="item2" varStatus="status2" begin="1" end="${game.qu}">
+                                    <td align="center">
+                                        <a href="/grade/show/${game.id}/${status1.index}/${status2.index}" target="_blank">查看</a>
+                                    </td>
+                                </c:forEach>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                    <fieldset>
+                        <legend>队伍排名</legend>
+                    </fieldset>
+                    <table style="width: 100%;" class="table table-striped table-bordered">
+                        <tr>
+                            <th align="center">场/区</th>
+                            <c:forEach var="item1" varStatus="status1" begin="1" end="${game.qu}">
+                                <th align="center"> 第 ${status1.index} 区</th>
+                            </c:forEach>
+                        </tr>
+                        <c:forEach var="item1" varStatus="status1" begin="1" end="${game.chang}">
+                            <tr>
+                                <td align="center">
+                                    <a href="/grade/group/${game.id}/${status1.index}" target="_blank">第 ${status1.index} 场</a>
+                                </td>
+                                <c:forEach var="item2" varStatus="status2" begin="1" end="${game.qu}">
+                                    <td align="center">
+                                        <a href="/grade/group/${game.id}/${status1.index}/${status2.index}" target="_blank">查看</a>
+                                    </td>
+                                </c:forEach>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
             </div>
         </div>
     </div>

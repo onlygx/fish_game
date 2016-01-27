@@ -49,4 +49,16 @@ public class PersonServiceImpl implements PersonService {
     public List<Person> listByGame(Long gameId) {
         return personMapper.listByGame(gameId);
     }
+
+    @Override
+    public List<Person> listExcludePersonTypeByGame(Long gameId,Integer type) {
+
+        return personMapper.listExcludePersonTypeByGame(gameId,type);
+    }
+
+    @Override
+    public List<Person> listByGameType(Long id, int i) {
+
+        return personMapper.listByGameType(id,i);
+    }
 }

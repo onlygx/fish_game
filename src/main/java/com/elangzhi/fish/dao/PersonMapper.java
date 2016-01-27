@@ -19,4 +19,8 @@ public interface PersonMapper {
     int updateByPrimaryKey(Person record);
 
     List<Person> listByGame(@Param("gameId") Long gameId);
+
+    List<Person> listExcludePersonTypeByGame(@Param("gameId") Long gameId,@Param("type") Integer type);
+
+    List<Person> listByGameType(@Param("gameId") Long gameId,@Param("type") Integer type);
 }

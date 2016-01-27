@@ -23,7 +23,7 @@
     <script src="/static/js/tools.js"></script>
 
 </head>
-<body style="background-image: url(/images/index-background.jpg);background-repeat: no-repeat;background-attachment:fixed;">
+<body >
 <jsp:include page="../navbar.jsp"></jsp:include>
 <div class="container" style="margin-top: 70px;">
 
@@ -88,7 +88,7 @@
         <div class="form-group">
             <label for="select2_1" class="col-sm-1 control-label">身份</label>
             <div class="col-sm-10">
-                <select class="form-control" id="select2_1">
+                <select class="form-control" name="type" id="select2_1">
                     <option value="1">组委会主席</option>
                     <option value="2">主任仲裁员</option>
                     <option value="3">总裁判长</option>
@@ -105,6 +105,7 @@
             <label for="input2_2" class="col-sm-1 control-label">姓名</label>
             <div class="col-sm-10">
                 <input type="text" name="name" class="form-control" id="input2_2" >
+                <input type="hidden" name="gameId" value="${game.id}">
             </div>
         </div>
         <div class="form-group">
@@ -123,13 +124,31 @@
         <tr>
             <th>姓名</th>
             <th>电话</th>
+            <th>身份</th>
             <th>操作</th>
         </tr>
+    <c:forEach var="item" items="${persons}" varStatus="status" >
         <tr>
-            <td>姓名</td>
-            <td>电话</td>
-            <td>操作</td>
+            <td>${item.name}</td>
+            <td>${item.phone}</td>
+            <td>
+                <c:if test="${item.type==1}">组委会主席</c:if>
+                <c:if test="${item.type==2}">主任仲裁员</c:if>
+                <c:if test="${item.type==3}">总裁判长</c:if>
+                <c:if test="${item.type==4}">副总裁判长</c:if>
+                <c:if test="${item.type==5}">成统裁判长</c:if>
+                <c:if test="${item.type==6}">成统裁判员</c:if>
+                <c:if test="${item.type==7}">分区裁判长</c:if>
+                <c:if test="${item.type==8}">分区裁判员</c:if>
+                <c:if test="${item.type==9}">助理裁判员</c:if>
+
+            </td>
+            <td>
+                <a href="javascript:void(0);" onclick="delPerson('${item.id}')">删除</a>
+            </td>
         </tr>
+    </c:forEach>
+
     </table>
 </div>
 </body>
@@ -138,6 +157,16 @@
     function savePerson(){
         var param = tools.formParams("personParam");
         tools.action("/person/save",param,function(data){
+            tools.tip(data,{1:"操作失败！"});
+            location.reload();
+        });
+    }
+
+    function delPerson(id){
+        if(!confirm("确定删除么？")){
+            return;
+        }
+        tools.action("/person/delete",{"id":id},function(data){
             tools.tip(data,{1:"操作失败！"});
             location.reload();
         });
