@@ -15,6 +15,8 @@ public class Grade {
 
     private Integer qu;
 
+    private Integer room;
+
     private Integer number;
 
     private Double weight;
@@ -26,6 +28,23 @@ public class Grade {
 
     //-------------
     private String personName;
+    private String personNumber;
+
+    public String getPersonNumber() {
+        return personNumber;
+    }
+
+    public void setPersonNumber(String personNumber) {
+        this.personNumber = personNumber;
+    }
+
+    public Integer getRoom() {
+        return room;
+    }
+
+    public void setRoom(Integer room) {
+        this.room = room;
+    }
 
     public String getPersonName() {
         return personName;

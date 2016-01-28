@@ -8,13 +8,14 @@
     <result column="time" property="time" jdbcType="TIMESTAMP" />
     <result column="chang" property="chang" jdbcType="INTEGER" />
     <result column="qu" property="qu" jdbcType="INTEGER" />
+    <result column="room" property="room" jdbcType="INTEGER" />
     <result column="number" property="number" jdbcType="INTEGER" />
     <result column="weight" property="weight" jdbcType="DOUBLE" />
     <result column="grade" property="grade" jdbcType="INTEGER" />
     <result column="ranking" property="ranking" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, person_id, game_id, `time`, chang, qu, `number`, weight, grade, ranking
+    id, person_id, game_id, `time`, chang, qu,room, `number`, weight, grade, ranking
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -28,11 +29,11 @@
   </delete>
   <insert id="insert" parameterType="com.elangzhi.fish.model.Grade" >
     insert into grade (id, person_id, game_id, 
-      `time`, chang, qu, 
+      `time`, chang, qu, room,
       `number`, weight, grade, 
       ranking)
     values (#{id,jdbcType=BIGINT}, #{personId,jdbcType=BIGINT}, #{gameId,jdbcType=BIGINT}, 
-      #{time,jdbcType=TIMESTAMP}, #{chang,jdbcType=INTEGER}, #{qu,jdbcType=INTEGER}, 
+      #{time,jdbcType=TIMESTAMP}, #{chang,jdbcType=INTEGER}, #{qu,jdbcType=INTEGER}, #{room,jdbcType=INTEGER},
       #{number,jdbcType=INTEGER}, #{weight,jdbcType=DOUBLE}, #{grade,jdbcType=INTEGER}, 
       #{ranking,jdbcType=INTEGER})
   </insert>
@@ -56,6 +57,9 @@
       </if>
       <if test="qu != null" >
         qu,
+      </if>
+      <if test="room != null" >
+        room,
       </if>
       <if test="number != null" >
         `number`,
@@ -89,6 +93,9 @@
       <if test="qu != null" >
         #{qu,jdbcType=INTEGER},
       </if>
+      <if test="room != null" >
+        #{room,jdbcType=INTEGER},
+      </if>
       <if test="number != null" >
         #{number,jdbcType=INTEGER},
       </if>
@@ -121,6 +128,10 @@
       <if test="qu != null" >
         qu = #{qu,jdbcType=INTEGER},
       </if>
+      <if test="room != null" >
+        room = #{room,jdbcType=INTEGER},
+      </if>
+
       <if test="number != null" >
         `number` = #{number,jdbcType=INTEGER},
       </if>
@@ -143,6 +154,7 @@
       `time` = #{time,jdbcType=TIMESTAMP},
       chang = #{chang,jdbcType=INTEGER},
       qu = #{qu,jdbcType=INTEGER},
+      room = #{room,jdbcType=INTEGER},
       `number` = #{number,jdbcType=INTEGER},
       weight = #{weight,jdbcType=DOUBLE},
       grade = #{grade,jdbcType=INTEGER},
@@ -152,7 +164,7 @@
 
 
   <select id="findInfo1" resultMap="BaseResultMap">
-    select a.*,b.`name` personName
+    select a.*,b.`name` personName,b.number personNumber
     from grade a
     left join person b on a.person_id = b.id
     where 1=1

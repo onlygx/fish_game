@@ -36,6 +36,7 @@
     </h3>
     <table style="width: 100%;" class="table table-striped table-bordered">
         <tr>
+            <th>编号</th>
             <th>姓名</th>
             <th>尾数</th>
             <th>重量</th>
@@ -43,6 +44,7 @@
         </tr>
         <c:forEach var="item" items="${grades}" varStatus="status">
             <tr>
+                <td>${item.personNumber}</td>
                 <td>${item.personName}</td>
                 <td>${item.number}</td>
                 <td>${item.weight}</td>
