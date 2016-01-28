@@ -24,13 +24,16 @@
     <script src="/static/js/qrcode.js"></script>
 
 </head>
-<body>
+<body style="background-color: #FFFF33;">
 <jsp:include page="../navbar.jsp"></jsp:include>
 
 <div class="container"   style="margin-top: 80px;">
     <di style="padding-bottom: 50px;" align="left">
         <button class="btn btn-info" onclick="luck()">抽奖</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中奖用户：<span id="luckResoult">点击抽奖开始抽奖...</span>
+        <label style="margin-left: 50px;">抽奖数量：</label>
+        <input id="chouCount" value="1" style="width: 100px;"> 人
+        <%--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中奖用户：<span id="luckResoult">点击抽奖开始抽奖...</span>--%>
+        <button id="modeshow" class="btn btn-warning" style="display: none;"  data-toggle="modal" data-target="#myModaLucky"  onclick="">中奖用户</button>
     </di>
 
     <table style="width: 100%;margin-top: 20px; " class="table table-striped table-bordered">
@@ -57,20 +60,71 @@
 
     </table>
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModaLucky" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">中奖用户</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <table style="width: 100%;" id="luckyTable" class="table table-bordered">
+                       <%-- <tr>
+                            <th align="center">场/区</th>
+                        </tr>--%>
+                    </table>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
 <script>
 
     function luck(){
+        $("#luckyTable").html("");
         var pers = new Array();
         $('input[name="persons"]:checked').each(function(){
             pers.push($(this).val());
         });
-        var random = parseInt(Math.random()*pers.length);
-        var id = pers[random];
-        var name = $("#n_"+id).text();
-        $("#luckResoult").text(name);
-        $("#p_"+id).attr("checked",false);
+        var luckyCount = 1;
+        var zhongjiang = new Array();
+        try{
+            luckyCount = parseInt($("#chouCount").val());
+
+        }catch (e){
+            luckyCount = 1;
+        }
+        for(var i = 0 ;i<luckyCount;i++){
+            var random = parseInt(Math.random()*pers.length);
+            var id = pers[random];
+            var name = $("#n_"+id).text();
+            $("#p_"+id).attr("checked",false);
+            intoLuckyTable(name);
+        }
+        $("#modeshow").click();
+        //alert("中奖用户："+zhongjiang.join(","));
+    }
+
+    function intoLuckyTable(name){
+
+        var tr = $("<tr>");
+        var td = $("<td align='center'>");
+        td.text(name);
+        td.appendTo(tr);
+        tr.appendTo($("#luckyTable"));
+
     }
 
 </script>

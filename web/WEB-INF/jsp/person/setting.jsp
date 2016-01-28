@@ -22,7 +22,7 @@
     <script src="/static/js/bootstrap/bootstrap.min.js"></script>
     <script src="/static/js/tools.js"></script>
 </head>
-<body>
+<body style="background-color: #3399CC;">
 <jsp:include page="../navbar.jsp"></jsp:include>
 <div class="container" style="margin-top: 70px;">
 

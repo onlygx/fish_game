@@ -38,20 +38,23 @@
         <tr>
             <th>编号</th>
             <th>姓名</th>
+            <th>钓位</th>
             <th>尾数</th>
             <th>重量</th>
-            <th>操作</th>
+            <th>运动员签字</th>
+            <th>相邻签字</th>
+            <th>备注</th>
         </tr>
         <c:forEach var="item" items="${grades}" varStatus="status">
             <tr>
                 <td>${item.personNumber}</td>
                 <td>${item.personName}</td>
+                <td>${item.room}</td>
                 <td>${item.number}</td>
                 <td>${item.weight}</td>
-                <td>
-                    <a href="javascript:void(0);" onclick="del('${item.id}')">删除</a>
-                    <a href="/person/print/${item.id}"  target="_blank">查看/打印</a>
-                </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
             </tr>
         </c:forEach>
 

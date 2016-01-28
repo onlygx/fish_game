@@ -35,28 +35,28 @@
         <img src="/images/index-top.png" style="width: 30%;height: 30%;">
     </div>
     <div  align="center">
-        <h1 style="color: black;">钓鱼比赛服务系统</h1>
+        <h1 style="color: black;font-weight: bold;">钓鱼比赛计分系统</h1>
     </div>
     <div  align="center" style="margin-top: 50px;">
         <table style="width: 100%;text-align: center;" align="center">
             <tr>
                 <td align="center">
-                    <a class="btn btn-info" href="/game/setting" target="_blank">赛事设置</a>
+                    <a class="btn btn-warning" style="width: 150px;background-color: #FF6600;font-weight: bold;color: black;" href="/game/setting" target="_blank">赛事设置</a>
                 </td>
                 <td align="center">
-                    <a class="btn btn-success" href="/person/setting" target="_blank">报名检入</a>
+                    <a class="btn btn-warning" style="width: 150px;background-color: #FF6600;font-weight: bold;color: black;" href="/person/setting" target="_blank">报名检入</a>
                 </td>
                 <td align="center">
-                    <a class="btn btn-warning" href="/game/show/${game.id}" target="_blank">下载比赛</a>
+                    <button class="btn btn-warning" style="width: 150px;background-color: #FF6600;font-weight: bold;color: black;"  data-toggle="modal" data-target="#myModa3"  onclick="">罚&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分</button>
                 </td>
                 <td align="center">
-                    <button class="btn btn-primary"  data-toggle="modal" data-target="#myModal"  onclick="">制表打印</button>
+                    <button class="btn btn-warning" style="width: 150px;background-color: #FF6600;font-weight: bold;color: black;"  data-toggle="modal" data-target="#myModal"  onclick="">制表打印</button>
                 </td>
                 <td align="center">
-                    <button class="btn btn-success"  data-toggle="modal" data-target="#myModal2"  onclick="">成绩打印</button>
+                    <button class="btn btn-warning" style="width: 150px;background-color: #FF6600;font-weight: bold;color: black;"  data-toggle="modal" data-target="#myModal2"  onclick="">成绩打印</button>
                 </td>
                 <td align="center">
-                    <a class="btn btn-info" href="/person/lucky/${game.id}" target="_blank">幸运抽奖</a>
+                    <a class="btn btn-warning" style="width: 150px;background-color: #FF6600;font-weight: bold;color: black;" href="/person/lucky/${game.id}" target="_blank">幸运抽奖</a>
                 </td>
             </tr>
         </table>
@@ -108,6 +108,51 @@
 
 
 <!-- Modal -->
+<div class="modal fade" id="myModa3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabe3">罚分 -  ${game.name}</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-horizontal" id="gradeParam">
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">场次：</label>
+                            <div class="col-sm-7">
+                                <select name="chang" class="form-control">
+                                    <c:forEach var="item1" varStatus="status1" begin="1" end="${game.chang}">
+                                        <option value="${status1.index}">第${status1.index}场</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">编号：</label>
+                            <div class="col-sm-7">
+                                <input name="number" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label  class="col-sm-3 control-label">罚分：</label>
+                            <div class="col-sm-7">
+                                <input  class="form-control" type="text" name="fa" value=""/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -118,7 +163,7 @@
             <div class="modal-body">
                 <div>
                     <fieldset>
-                        <legend>个人排名</legend>
+                        <legend>个人排名   <a class="btn btn-success" style="float:right;" href="/grade/show/${game.id}" target="_blank">总成绩</a></legend>
                     </fieldset>
                     <table style="width: 100%;" class="table table-striped table-bordered">
                         <tr>
@@ -141,7 +186,7 @@
                         </c:forEach>
                     </table>
                     <fieldset>
-                        <legend>队伍排名</legend>
+                        <legend>队伍排名  <a class="btn btn-success" style="float:right;" href="/grade/show/${game.id}" target="_blank">总成绩</a></legend>
                     </fieldset>
                     <table style="width: 100%;" class="table table-striped table-bordered">
                         <tr>

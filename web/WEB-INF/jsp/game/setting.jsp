@@ -23,7 +23,7 @@
     <script src="/static/js/tools.js"></script>
 
 </head>
-<body >
+<body style="background-color: #99CCCC;">
 <jsp:include page="../navbar.jsp"></jsp:include>
 <div class="container" style="margin-top: 70px;">
 
@@ -76,7 +76,8 @@
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-10">
                 <button type="button" class="btn btn-success" onclick="update()">修改</button>
-                <button type="button" class="btn btn-danger" onclick="save()">创建新比赛</button>
+                <button type="button" style="margin-left: 50px;" class="btn btn-danger" onclick="save()">清空并新建比赛</button>
+                <button type="button" style="margin-left: 50px;" class="btn btn-info" onclick="window.print()">打印</button>
             </div>
         </div>
     </form>
