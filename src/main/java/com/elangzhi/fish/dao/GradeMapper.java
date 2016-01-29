@@ -19,4 +19,6 @@ public interface GradeMapper {
     int updateByPrimaryKey(Grade record);
 
     List<Grade> findInfo1(@Param("gameId") Long gameId,@Param("chang") Integer chang,@Param("qu") Integer qu);
+
+    List<Grade> listByGame(Long id);
 }

@@ -2,8 +2,10 @@ package com.elangzhi.fish.controller.game;
 
 import com.elangzhi.fish.controller.json.Tip;
 import com.elangzhi.fish.model.Game;
+import com.elangzhi.fish.model.Grade;
 import com.elangzhi.fish.model.Person;
 import com.elangzhi.fish.services.GameService;
+import com.elangzhi.fish.services.GradeService;
 import com.elangzhi.fish.services.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,6 +42,31 @@ public class GameController {
         return new ModelAndView("game/down",model);
     }
 
+    @RequestMapping("/downGame")
+    @ResponseBody
+    public Game down(){
+        Game game = gameService.findNew();
+
+        return game;
+    }
+
+    @RequestMapping("/downUser")
+    @ResponseBody
+    public List<Person> downUser(){
+        Game game = gameService.findNew();
+        List<Person> personList = personService.listByGame(game.getId());
+        return personList;
+    }
+
+    @RequestMapping("/downGrade")
+    @ResponseBody
+    public List<Grade> downGrade(){
+        Game game = gameService.findNew();
+        List<Grade> gradeList = gradeService.listByGame(game.getId());
+        return gradeList;
+    }
+
+
     @RequestMapping("/save")
     @ResponseBody
     public Tip save(Game game){
@@ -73,4 +100,7 @@ public class GameController {
 
     @Resource
     PersonService personService;
+
+    @Resource
+    GradeService gradeService;
 }

@@ -175,4 +175,11 @@
     </if>
     order by a.number desc,a.weight desc
   </select>
+
+  <select id="listByGame" resultMap="BaseResultMap">
+    select a.*,b.`name` personName,b.number personNumber
+    from grade a
+    left join person b on a.person_id = b.id
+    where a.game_id = #{id,jdbcType=BIGINT}
+  </select>
 </mapper>

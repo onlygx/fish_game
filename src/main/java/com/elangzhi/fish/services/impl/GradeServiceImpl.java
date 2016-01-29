@@ -43,4 +43,9 @@ public class GradeServiceImpl implements GradeService {
     public List<Grade> findInfo1(Long gameId, Integer chang, Integer qu) {
         return gradeMapper.findInfo1(gameId,chang,qu);
     }
+
+    @Override
+    public List<Grade> listByGame(Long id) {
+        return gradeMapper.listByGame(id);
+    }
 }

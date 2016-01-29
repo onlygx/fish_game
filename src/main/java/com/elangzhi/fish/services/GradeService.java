@@ -10,4 +10,6 @@ import java.util.List;
 public interface GradeService extends BaseService<Grade> {
 
     List<Grade> findInfo1(Long gameId,Integer chang,Integer qu);
+
+    List<Grade> listByGame(Long id);
 }
