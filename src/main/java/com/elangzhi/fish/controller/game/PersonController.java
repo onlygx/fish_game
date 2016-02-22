@@ -2,9 +2,12 @@ package com.elangzhi.fish.controller.game;
 
 import com.elangzhi.fish.controller.json.Tip;
 import com.elangzhi.fish.model.Game;
+import com.elangzhi.fish.model.Grade;
 import com.elangzhi.fish.model.Person;
 import com.elangzhi.fish.services.GameService;
+import com.elangzhi.fish.services.GradeService;
 import com.elangzhi.fish.services.PersonService;
+import com.elangzhi.fish.tools.UUIDFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,6 +49,41 @@ public class PersonController {
             e.printStackTrace();
             return new Tip(1);
         }
+    }
+
+    @RequestMapping("/firstChouHao")
+    @ResponseBody
+    public Grade firstChouHao(@RequestParam("id") Long id){
+        Game game = gameService.findNew();
+        Person person = personService.findById(id);
+        List<Grade> quCount = gradeService.countQu(game.getId());
+        try {
+
+            for(int i = 0 ; i < game.getQu(); i ++){
+                List<Grade> gradeCount = gradeService.findInfo1(game.getId(),1,i+1);
+                if(gradeCount.size() == 0){
+                    return addGrade(game.getId(),id,i+1,1,person);
+                }
+            }
+
+            return addGrade(game.getId(),id,quCount.get(0).getQu(),quCount.get(0).getQuCount()+1,person);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return addGrade(game.getId(),id,quCount.get(0).getQu(),quCount.get(0).getQuCount()+1,person);
+    }
+
+    public Grade addGrade(Long gameId,Long personId,Integer qu,Integer number,Person person){
+        Grade grade = new Grade();
+        grade.setChang(1);
+        grade.setPersonId(personId);
+        grade.setGameId(gameId);
+        grade.setQu(qu);
+        grade.setRoom(number);
+        grade.setPersonName(person.getName());
+        grade.setPersonNumber(person.getNumber());
+        gradeService.save(grade);
+        return grade;
     }
 
     public Integer genNumber(Person old){
@@ -98,4 +137,7 @@ public class PersonController {
 
     @Resource
     GameService gameService;
+
+    @Resource
+    GradeService gradeService;
 }

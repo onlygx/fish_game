@@ -18,15 +18,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/game/list">钓鱼比赛</a>
+            <a class="navbar-brand" href="/game">钓鱼比赛</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-<%--            <ul class="nav navbar-nav">
-                <li class="active"><a href="/game/list">主页 <span class="sr-only">(current)</span></a></li>
-
-            </ul>--%>
+           <ul class="nav navbar-nav">
+                <li class="active"><a href="/game">主页 <span class="sr-only">(current)</span></a></li>
+               <li class="active"><a href="javascript:window.print()">打印 </a></li>
+            </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">服务器地址：192.168.23.1</a></li>

@@ -155,6 +155,7 @@
     <if test="gameId != null" >
       and a.`game_id` = #{gameId,jdbcType=BIGINT}
     </if>
+    order by a.number
   </select>
 
   <select id="listExcludePersonTypeByGame" resultMap="BaseResultMap">
@@ -167,7 +168,7 @@
     <if test="type != null" >
       and a.`type` != #{type,jdbcType=INTEGER}
     </if>
-    order by number desc
+    order by a.type
   </select>
 
   <select id="listByGameType" resultMap="BaseResultMap">

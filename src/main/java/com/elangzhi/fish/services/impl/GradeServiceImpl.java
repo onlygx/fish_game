@@ -6,6 +6,7 @@ import com.elangzhi.fish.services.GradeService;
 import com.elangzhi.fish.tools.UUIDFactory;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +21,7 @@ public class GradeServiceImpl implements GradeService {
     @Override
     public Long save(Grade grade) {
         grade.setId(UUIDFactory.getLongId());
+        grade.setTime(new Date());
         return gradeMapper.insertSelective(grade);
     }
 
@@ -47,5 +49,19 @@ public class GradeServiceImpl implements GradeService {
     @Override
     public List<Grade> listByGame(Long id) {
         return gradeMapper.listByGame(id);
+    }
+
+    @Override
+    public List<Grade> countQu(Long id) {
+        return gradeMapper.countQu(id);
+    }
+
+    @Override
+    public Grade findByGameChangPerson(Long gameId, Integer chang, Long personId) {
+        List<Grade> list = gradeMapper.findByGameChangPerson(gameId, chang,personId);
+        if(list.size()>0){
+            return list.get(0);
+        }
+        return null;
     }
 }

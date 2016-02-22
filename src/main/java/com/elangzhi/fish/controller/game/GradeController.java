@@ -30,7 +30,9 @@ public class GradeController {
         model.put("game",game);
         model.put("chang",chang);
         model.put("qu",qu);
+        List<Grade> grades = gradeService.findInfo1(gameId,chang,qu);
 
+        model.put("grades",grades);
         return new ModelAndView("grade/show",model);
     }
 
@@ -39,7 +41,8 @@ public class GradeController {
         Game game = gameService.findById(gameId);
         model.put("game",game);
         model.put("chang",chang);
-
+        List<Grade> grades = gradeService.findInfo1(gameId,chang,null);
+        model.put("grades",grades);
         return new ModelAndView("grade/show",model);
     }
 
@@ -68,6 +71,25 @@ public class GradeController {
         try {
             gradeService.save(grade);
             return new Tip();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Tip(1);
+        }
+    }
+
+    @RequestMapping("/saveValue")
+    @ResponseBody
+    public Tip saveValue(Grade grade){
+        try {
+            Grade grade1 = gradeService.findByGameChangPerson(grade.getGameId(),grade.getChang(),grade.getPersonId());
+            if(grade1 != null){
+                grade1.setWeight(grade.getWeight());
+                grade1.setNumber(grade.getNumber());
+                gradeService.updateById(grade1);
+                return new Tip();
+            }else{
+                return new Tip(1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return new Tip(1);

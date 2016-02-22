@@ -41,10 +41,10 @@
         <table style="width: 100%;text-align: center;" align="center">
             <tr>
                 <td align="center">
-                    <a class="btn btn-warning" style="width: 150px;background-color: #FF6600;font-weight: bold;color: black;" href="/game/setting" target="_blank">赛事设置</a>
+                    <a class="btn btn-warning" style="width: 150px;background-color: #FF6600;font-weight: bold;color: black;" href="/game/setting"  >赛事设置</a>
                 </td>
                 <td align="center">
-                    <a class="btn btn-warning" style="width: 150px;background-color: #FF6600;font-weight: bold;color: black;" href="/person/setting" target="_blank">报名检入</a>
+                    <a class="btn btn-warning" style="width: 150px;background-color: #FF6600;font-weight: bold;color: black;" href="/person/setting" >报名检入</a>
                 </td>
                 <td align="center">
                     <button class="btn btn-warning" style="width: 150px;background-color: #FF6600;font-weight: bold;color: black;"  data-toggle="modal" data-target="#myModa3"  onclick="">罚&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分</button>

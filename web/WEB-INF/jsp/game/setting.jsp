@@ -82,7 +82,7 @@
         </div>
     </form>
 
-    <form class="form-horizontal" id="personParam">
+    <form class="form-horizontal" id="personParam" style="margin-top: 50px;">
         <fieldset>
             <legend>裁判以及主席管理</legend>
         </fieldset>

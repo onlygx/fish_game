@@ -21,4 +21,8 @@ public interface GradeMapper {
     List<Grade> findInfo1(@Param("gameId") Long gameId,@Param("chang") Integer chang,@Param("qu") Integer qu);
 
     List<Grade> listByGame(Long id);
+
+    List<Grade> countQu(Long id);
+
+    List<Grade> findByGameChangPerson(@Param("gameId") Long gameId,@Param("chang") Integer chang, @Param("personId")Long personId);
 }

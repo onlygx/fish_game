@@ -12,4 +12,9 @@ public interface GradeService extends BaseService<Grade> {
     List<Grade> findInfo1(Long gameId,Integer chang,Integer qu);
 
     List<Grade> listByGame(Long id);
+
+    List<Grade> countQu(Long id);
+
+
+    Grade findByGameChangPerson(Long gameId, Integer chang, Long personId);
 }

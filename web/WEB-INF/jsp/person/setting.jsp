@@ -75,8 +75,9 @@
 
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-10">
-                <button type="button" class="btn btn-success" onclick="save()">添加</button>
-                <a class="btn btn-info" href="javascript:location.reload()" >清空内容</a>
+                <button type="button" class="btn btn-success" onclick="save()">确认</button>
+                <a class="btn btn-info"  style="margin-left: 30px;" href="javascript:location.reload()" >清空内容</a>
+                <label class="btn btn-info" style="margin-left: 30px;">总人数：${persons.size()}</label>
             </div>
         </div>
     </form>

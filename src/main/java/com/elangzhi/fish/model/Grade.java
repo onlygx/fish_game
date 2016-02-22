@@ -23,18 +23,27 @@ public class Grade {
 
     private Integer grade;
 
+    private Integer quCount;
     private Integer ranking;
 
 
     //-------------
     private String personName;
-    private String personNumber;
+    private Integer personNumber;
 
-    public String getPersonNumber() {
+    public Integer getQuCount() {
+        return quCount;
+    }
+
+    public void setQuCount(Integer quCount) {
+        this.quCount = quCount;
+    }
+
+    public Integer getPersonNumber() {
         return personNumber;
     }
 
-    public void setPersonNumber(String personNumber) {
+    public void setPersonNumber(Integer personNumber) {
         this.personNumber = personNumber;
     }
 

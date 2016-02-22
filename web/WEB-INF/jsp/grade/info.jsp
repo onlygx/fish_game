@@ -32,7 +32,6 @@
         <c:if test="${qu != null}">
             ，第 ${qu} 区
         </c:if>
-        信息
     </h3>
     <table style="width: 100%;" class="table table-striped table-bordered">
         <tr>
