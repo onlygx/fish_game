@@ -7,12 +7,10 @@ import java.util.Random;
  */
 public class JavaTest {
     public static void main(String[] args) {
-        Random rand = new Random();
-
-        for(int i = 0 ;i < 50 ; i++){
-            int randNum = rand.nextInt(10)+1;
-            System.out.println(randNum);
+        int i = 1;
+        if(i==1 || i==5){
+            System.out.println("success");
         }
-
+        System.out.println("error");
     }
 }

@@ -117,7 +117,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <form class="form-horizontal" id="gradeParam">
+                    <form class="form-horizontal" id="fafenParam">
                         <div class="form-group">
                             <label  class="col-sm-3 control-label">场次：</label>
                             <div class="col-sm-7">
@@ -131,14 +131,15 @@
                         <div class="form-group">
                             <label  class="col-sm-3 control-label">编号：</label>
                             <div class="col-sm-7">
-                                <input name="number" class="form-control">
+                                <input type="text" name="personId" class="form-control">
+                                <input type="hidden" name="gameId" value="${game.id}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label  class="col-sm-3 control-label">罚分：</label>
                             <div class="col-sm-7">
-                                <input  class="form-control" type="text" name="fa" value=""/>
+                                <input  class="form-control" type="text" name="ranking" value=""/>
                             </div>
                         </div>
                     </form>
@@ -146,7 +147,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">保存</button>
+                <button type="button" class="btn btn-primary" onclick="fafen()">保存</button>
             </div>
         </div>
     </div>
@@ -158,7 +159,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel2">成绩打印</h4>
+                <h4 class="modal-title" id="myModalLabel2">成绩打印 <a href="#" onclick="jifen()">开始/重新计分</a></h4>
+
             </div>
             <div class="modal-body">
                 <div>
@@ -186,7 +188,7 @@
                         </c:forEach>
                     </table>
                     <fieldset>
-                        <legend>队伍排名  <a class="btn btn-success" style="float:right;" href="/grade/show/${game.id}" target="_blank">总成绩</a></legend>
+                        <legend>队伍排名  <a class="btn btn-success" style="float:right;" href="/grade/group/${game.id}" target="_blank">总成绩</a></legend>
                     </fieldset>
                     <table style="width: 100%;" class="table table-striped table-bordered">
                         <tr>
@@ -218,4 +220,20 @@
     </div>
 </div>
 </body>
+<script>
+    function jifen(){
+        tools.action("/grade/jifen/${game.id}",null,function(data){
+            tools.tip(data,{1:"操作失败！"});
+            location.reload();
+        });
+    }
+
+    function fafen(){
+        var param = tools.formParams("fafenParam");
+        tools.action("/grade/fafen",param,function(data){
+            tools.tip(data,{1:"操作失败！"});
+            location.reload();
+        });
+    }
+</script>
 </html>

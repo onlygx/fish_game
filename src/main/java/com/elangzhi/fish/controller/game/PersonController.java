@@ -15,8 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by GaoXiang on 2016/1/20 0020.
@@ -25,6 +27,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/person")
 public class PersonController {
+    private List<Integer> haos;
 
     @RequestMapping("/setting")
     public ModelAndView setting(ModelMap model){
@@ -55,22 +58,55 @@ public class PersonController {
     @ResponseBody
     public Grade firstChouHao(@RequestParam("id") Long id){
         Game game = gameService.findNew();
+        if(haos == null){
+            addHaos(game);
+        }
+        if(haos.size() == 0){
+            return null;
+        }
         Person person = personService.findById(id);
-        List<Grade> quCount = gradeService.countQu(game.getId());
+        int qu = 0,room = 0;
         try {
-
-            for(int i = 0 ; i < game.getQu(); i ++){
-                List<Grade> gradeCount = gradeService.findInfo1(game.getId(),1,i+1);
-                if(gradeCount.size() == 0){
-                    return addGrade(game.getId(),id,i+1,1,person);
-                }
-            }
-
-            return addGrade(game.getId(),id,quCount.get(0).getQu(),quCount.get(0).getQuCount()+1,person);
+            int randNum = getRandom(haos.size());
+            int roomValue = haos.get(randNum);
+            haos.remove(randNum);
+            qu = roomValue/1000;
+            room = roomValue%1000;
+            return addGrade(game.getId(),id,qu,room,person);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return addGrade(game.getId(),id,quCount.get(0).getQu(),quCount.get(0).getQuCount()+1,person);
+
+
+        return null;
+    }
+
+    /**
+     * 获取随机数
+     * @param size
+     * @return
+     */
+    private int getRandom(Integer size) {
+        Random rand = new Random();
+        int randNum = rand.nextInt(size);
+        return randNum;
+    }
+
+    /**
+     * 初始化号码池,准备抽号
+     * @param game
+     */
+    private void addHaos(Game game) {
+        haos = new ArrayList<Integer>();
+        Integer qu = game.getQu();
+        List<Person> persons = personService.listByGame(game.getId());
+        Integer count = persons.size();
+        Integer max = count/qu+1;
+        for(int i = 1; i < qu+1 ; i ++){
+            for(int j = 1; j < max+1 ;j++){
+                haos.add(i*1000+j);
+            }
+        }
     }
 
     public Grade addGrade(Long gameId,Long personId,Integer qu,Integer number,Person person){

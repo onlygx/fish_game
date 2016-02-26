@@ -1,11 +1,14 @@
 package com.elangzhi.fish.services.impl;
 
+import com.elangzhi.fish.dao.GameMapper;
 import com.elangzhi.fish.dao.GradeMapper;
+import com.elangzhi.fish.model.Game;
 import com.elangzhi.fish.model.Grade;
 import com.elangzhi.fish.services.GradeService;
 import com.elangzhi.fish.tools.UUIDFactory;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +20,9 @@ public class GradeServiceImpl implements GradeService {
 
     @Resource
     GradeMapper gradeMapper;
+
+    @Resource
+    GameMapper gameMapper;
 
     @Override
     public Long save(Grade grade) {
@@ -63,5 +69,47 @@ public class GradeServiceImpl implements GradeService {
             return list.get(0);
         }
         return null;
+    }
+
+    @Override
+    public List<Grade> gradeShow(Long gameId, Integer chang, Integer qu) {
+        return gradeMapper.gradeShow(gameId,chang,qu);
+    }
+
+    @Override
+    public List<Grade> jifen(Long gameId,Integer chang) {
+        return gradeMapper.jifen(gameId,chang);
+    }
+
+    @Override
+    public Grade findByChangNumber(Long gameId,Integer chang, Long personId) {
+        List<Grade> gradeList = gradeMapper.findByChangNumber(gameId,chang,personId);
+        if(gradeList.size() > 0){
+            return gradeList.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Grade> zongfenShow(Long gameId) {
+        Game game = gameMapper.selectByPrimaryKey(gameId);
+        List<Grade> list = gradeMapper.zongfenShow(gameId);
+        for(Grade g : list){
+            g.setChild(new ArrayList<>());
+            for(int i = 1;i<=game.getChang();i++){
+                List<Grade> gradeList = gradeMapper.findByGameChangPerson(gameId,i,g.getPersonId());
+                if(gradeList.size() > 0){
+                    g.getChild().add(gradeList.get(0));
+                }else{
+                    g.getChild().add(new Grade());
+                }
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Grade> groupShow(Long gameId, Integer chang, Integer qu) {
+        return gradeMapper.groupShow(gameId,chang,qu);
     }
 }

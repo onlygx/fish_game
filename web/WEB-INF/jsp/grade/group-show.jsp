@@ -28,16 +28,12 @@
 
 <div class="container"  align="center" style="margin-top: 80px;">
     <h3>
-        第 ${chang} 场
-        <c:if test="${qu != null}">
-            ，第 ${qu} 区
-        </c:if>
+
     </h3>
     <table style="width: 100%;" class="table table-striped table-bordered">
         <tr>
-            <th>编号</th>
-            <th>姓名</th>
-            <th>钓位</th>
+
+            <th>队伍</th>
             <th>尾数</th>
             <th>重量</th>
             <th>计分</th>
@@ -47,14 +43,12 @@
         </tr>
         <c:forEach var="item" items="${grades}" varStatus="status">
             <tr>
-                <td>${item.personNumber}</td>
                 <td>${item.personName}</td>
-                <td>${item.room}</td>
                 <td>${item.number}</td>
                 <td>${item.weight}</td>
                 <td>${item.grade}</td>
                 <td>${item.ranking}</td>
-                <td>${item.grade+item.ranking}</td>
+                <td>${item.defen}</td>
                 <td>${status.count}</td>
             </tr>
         </c:forEach>

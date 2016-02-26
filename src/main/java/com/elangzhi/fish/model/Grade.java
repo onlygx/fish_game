@@ -1,6 +1,7 @@
 package com.elangzhi.fish.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Grade {
     private Long id;
@@ -17,19 +18,30 @@ public class Grade {
 
     private Integer room;
 
-    private Integer number;
+    private Integer number = 0;
 
-    private Double weight;
+    private Double weight = 0.0;
 
-    private Integer grade;
+    private Double grade = 0.0;
+
+    private Double ranking = 0.0;
+
+    private Double defen;
 
     private Integer quCount;
-    private Integer ranking;
 
-
+    List<Grade> child;
     //-------------
     private String personName;
     private Integer personNumber;
+
+    public List<Grade> getChild() {
+        return child;
+    }
+
+    public void setChild(List<Grade> child) {
+        this.child = child;
+    }
 
     public Integer getQuCount() {
         return quCount;
@@ -127,19 +139,27 @@ public class Grade {
         this.weight = weight;
     }
 
-    public Integer getGrade() {
+    public Double getGrade() {
         return grade;
     }
 
-    public void setGrade(Integer grade) {
+    public void setGrade(Double grade) {
         this.grade = grade;
     }
 
-    public Integer getRanking() {
+    public Double getRanking() {
         return ranking;
     }
 
-    public void setRanking(Integer ranking) {
+    public void setRanking(Double ranking) {
         this.ranking = ranking;
+    }
+
+    public Double getDefen() {
+        return defen;
+    }
+
+    public void setDefen(Double defen) {
+        this.defen = defen;
     }
 }

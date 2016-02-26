@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,13 +25,81 @@ import java.util.List;
 @RequestMapping("/grade")
 public class GradeController {
 
+    @RequestMapping("/jifen/{gameId}")
+    @ResponseBody
+    public Tip jifen(@PathVariable Long gameId,ModelMap model){
+        try {
+            Game game = gameService.findById(gameId);
+            for(int i = 1 ;i<=game.getChang();i++){
+                List<Grade> grades = gradeService.jifen(gameId,i);
+                //初始化
+                for(int j = 0;j<grades.size() ; j ++){
+                    grades.get(j).setGrade(j+1.0);
+                }
+
+                for(int j = 0;j<grades.size() ; j ++){
+
+                    List<Grade> temp = new ArrayList<>();
+                    temp.add(grades.get(j));
+                    for(int s = 0;s<grades.size() ; s ++){
+                        if(grades.get(j).equals(grades.get(s))){
+                            continue;
+                        }
+                        if(grades.get(0).getNumber() != null && grades.get(0).getNumber() != 0 ){
+                            if(grades.get(s).getNumber() == grades.get(j).getNumber()){
+                                temp.add(grades.get(s));
+                                grades.remove(grades.get(s));
+                                s--;
+                            }
+                        }else{
+                            if(grades.get(s).getWeight() == grades.get(j).getWeight()){
+                                temp.add(grades.get(s));
+                                grades.remove(grades.get(s));
+                                s--;
+                            }
+                        }
+
+                    }
+                    Double grade = 0.0;
+                    for(Grade g : temp){
+                        grade += g.getGrade();
+                    }
+                    for(Grade g : temp){
+                        g.setGrade(grade/temp.size());
+                        gradeService.updateById(g);
+                    }
+                }
+            }
+            return new Tip();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Tip(1);
+        }
+    }
+
+
+    @RequestMapping("/fafen")
+    @ResponseBody
+    public Tip fafen(Grade grade){
+        try {
+            Grade grade1 = gradeService.findByChangNumber(grade.getGameId(),grade.getChang(),grade.getPersonId());
+            grade1.setRanking(grade.getRanking());
+            gradeService.updateById(grade1);
+            return new Tip();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Tip(1);
+        }
+    }
+
+
     @RequestMapping("/show/{gameId}/{chang}/{qu}")
     public ModelAndView show1(@PathVariable Long gameId,@PathVariable Integer chang,@PathVariable Integer qu,ModelMap model){
         Game game = gameService.findById(gameId);
         model.put("game",game);
         model.put("chang",chang);
         model.put("qu",qu);
-        List<Grade> grades = gradeService.findInfo1(gameId,chang,qu);
+        List<Grade> grades = gradeService.gradeShow(gameId,chang,qu);
 
         model.put("grades",grades);
         return new ModelAndView("grade/show",model);
@@ -41,9 +110,53 @@ public class GradeController {
         Game game = gameService.findById(gameId);
         model.put("game",game);
         model.put("chang",chang);
-        List<Grade> grades = gradeService.findInfo1(gameId,chang,null);
+        List<Grade> grades = gradeService.gradeShow(gameId,chang,null);
         model.put("grades",grades);
         return new ModelAndView("grade/show",model);
+    }
+
+    @RequestMapping("/show/{gameId}")
+    public ModelAndView show3(@PathVariable Long gameId,ModelMap model){
+        Game game = gameService.findById(gameId);
+        model.put("game",game);
+        List<Grade> grades = gradeService.zongfenShow(gameId);
+        model.put("grades",grades);
+        return new ModelAndView("grade/show-all",model);
+    }
+
+
+    @RequestMapping("/group/{gameId}/{chang}/{qu}")
+    public ModelAndView groupShow1(@PathVariable Long gameId,@PathVariable Integer chang,@PathVariable Integer qu,ModelMap model){
+        Game game = gameService.findById(gameId);
+        model.put("game",game);
+        model.put("chang",chang);
+        model.put("qu",qu);
+        List<Grade> grades = gradeService.groupShow(gameId,chang,qu);
+
+        model.put("grades",grades);
+        return new ModelAndView("grade/group-show",model);
+    }
+
+    @RequestMapping("/group/{gameId}/{chang}")
+    public ModelAndView groupShow1(@PathVariable Long gameId,@PathVariable Integer chang,ModelMap model){
+        Game game = gameService.findById(gameId);
+        model.put("game",game);
+        model.put("chang",chang);
+        List<Grade> grades = gradeService.groupShow(gameId,chang,null);
+
+        model.put("grades",grades);
+        return new ModelAndView("grade/group-show",model);
+    }
+
+
+    @RequestMapping("/group/{gameId}")
+    public ModelAndView groupShow1(@PathVariable Long gameId,ModelMap model){
+        Game game = gameService.findById(gameId);
+        model.put("game",game);
+        List<Grade> grades = gradeService.groupShow(gameId,null,null);
+
+        model.put("grades",grades);
+        return new ModelAndView("grade/group-show",model);
     }
 
     @RequestMapping("/info/{gameId}/{chang}/{qu}")
@@ -62,6 +175,14 @@ public class GradeController {
         model.put("game",game);
         model.put("chang",chang);
         model.put("grades",gradeService.findInfo1(gameId,chang,null));
+        return new ModelAndView("grade/info",model);
+    }
+
+    @RequestMapping("/info/{gameId}")
+    public ModelAndView info2(@PathVariable Long gameId,ModelMap model){
+        Game game = gameService.findById(gameId);
+        model.put("game",game);
+        model.put("grades",gradeService.findInfo1(gameId,null,null));
         return new ModelAndView("grade/info",model);
     }
 

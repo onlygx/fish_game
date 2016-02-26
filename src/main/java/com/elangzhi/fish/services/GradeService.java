@@ -17,4 +17,14 @@ public interface GradeService extends BaseService<Grade> {
 
 
     Grade findByGameChangPerson(Long gameId, Integer chang, Long personId);
+
+    List<Grade> gradeShow(Long gameId, Integer chang, Integer qu);
+
+    List<Grade> jifen(Long gameId, Integer chang);
+
+    Grade findByChangNumber(Long gameId,Integer chang, Long personId);
+
+    List<Grade> zongfenShow(Long gameId);
+
+    List<Grade> groupShow(Long gameId, Integer chang, Integer qu);
 }

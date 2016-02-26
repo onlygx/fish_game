@@ -25,4 +25,14 @@ public interface GradeMapper {
     List<Grade> countQu(Long id);
 
     List<Grade> findByGameChangPerson(@Param("gameId") Long gameId,@Param("chang") Integer chang, @Param("personId")Long personId);
+
+    List<Grade> gradeShow(@Param("gameId") Long gameId,@Param("chang") Integer chang,@Param("qu") Integer qu);
+
+    List<Grade> jifen(@Param("gameId") Long gameId,@Param("chang") Integer chang);
+
+    List<Grade> zongfenShow(@Param("gameId") Long gameId);
+
+    List<Grade> findByChangNumber(@Param("gameId") Long gameId,@Param("chang") Integer chang,@Param("personId")  Long personId);
+
+    List<Grade> groupShow(@Param("gameId") Long gameId,@Param("chang") Integer chang,@Param("qu") Integer qu);
 }
