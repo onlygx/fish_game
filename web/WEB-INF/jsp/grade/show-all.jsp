@@ -30,7 +30,7 @@
     <h3>
         总成绩
     </h3>
-    <table style="width: 100%;" class="table table-striped table-bordered">
+    <table style="width: 100%;margin-top: 30px;" class="table table-striped table-bordered">
         <tr>
             <th>编号</th>
             <th>姓名</th>

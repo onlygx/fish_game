@@ -33,7 +33,7 @@
             ，第 ${qu} 区
         </c:if>
     </h3>
-    <table style="width: 100%;" class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered" style="width: 100%;margin-top: 30px;border-color: #0c0c0c;" >
         <tr>
             <th>编号</th>
             <th>姓名</th>

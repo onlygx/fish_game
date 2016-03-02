@@ -31,8 +31,8 @@
             <legend>参赛人员添加</legend>
         </fieldset>
         <div class="form-group">
-            <label for="input1" class="col-sm-1 control-label">人员名称</label>
-            <div class="col-sm-10">
+            <label for="input1" class="col-sm-2 control-label">人员名称</label>
+            <div class="col-sm-5">
                 <input type="text" name="name" class="form-control" id="input1">
                 <input type="hidden" name="type" value="20">
                 <input type="hidden" name="gameId" value="${game.id}">
@@ -40,41 +40,41 @@
         </div>
 
         <div class="form-group">
-            <label for="input2" class="col-sm-1 control-label">联系电话</label>
-            <div class="col-sm-10">
+            <label for="input2" class="col-sm-2 control-label">联系电话</label>
+            <div class="col-sm-5">
                 <input type="text" name="phone" class="form-control" id="input2">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="input3" class="col-sm-1 control-label">地址</label>
-            <div class="col-sm-10">
+            <label for="input3" class="col-sm-2 control-label">地址</label>
+            <div class="col-sm-5">
                 <input type="text" name="address" class="form-control" id="input3">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="input4" class="col-sm-1 control-label">报名费</label>
-            <div class="col-sm-10">
+            <label for="input4" class="col-sm-2 control-label">报名费</label>
+            <div class="col-sm-5">
                 <input type="text" name="price" class="form-control span3" id="input4">
             </div>
         </div>
         <div class="form-group">
-            <label for="input5" class="col-sm-1 control-label">队伍</label>
-            <div class="col-sm-10">
+            <label for="input5" class="col-sm-2 control-label">队伍</label>
+            <div class="col-sm-5">
                 <input type="text" name="group" class="form-control"  id="input5">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="input6" class="col-sm-1 control-label">备注</label>
-            <div class="col-sm-10">
+            <label for="input6" class="col-sm-2 control-label">备注</label>
+            <div class="col-sm-5">
                 <input type="text" name="intro" class="form-control" id="input6">
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-sm-offset-1 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-5">
                 <button type="button" class="btn btn-success" onclick="save()">确认</button>
                 <a class="btn btn-info"  style="margin-left: 30px;" href="javascript:location.reload()" >清空内容</a>
                 <label class="btn btn-info" style="margin-left: 30px;">总人数：${persons.size()}</label>

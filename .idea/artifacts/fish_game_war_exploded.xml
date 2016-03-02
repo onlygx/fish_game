@@ -39,6 +39,7 @@
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.9" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: javax:javaee-api:7.0" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="fish_game/web/Web" />

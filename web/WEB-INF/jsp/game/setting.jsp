@@ -32,49 +32,49 @@
             <legend>赛事管理</legend>
         </fieldset>
         <div class="form-group">
-            <label for="input1" class="col-sm-1 control-label">赛事名称</label>
-            <div class="col-sm-10">
+            <label for="input1" class="col-sm-2 control-label">赛事名称</label>
+            <div class="col-sm-5">
                 <input type="text" name="name" class="form-control" id="input1" value="${game.name}">
                 <input type="hidden" name="id" value="${game.id}">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="input2" class="col-sm-1 control-label">主办单位</label>
-            <div class="col-sm-10">
+            <label for="input2" class="col-sm-2 control-label">主办单位</label>
+            <div class="col-sm-5">
                 <input type="text" name="zhu" class="form-control" id="input2"  value="${game.zhu}">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="input3" class="col-sm-1 control-label">承办单位</label>
-            <div class="col-sm-10">
+            <label for="input3" class="col-sm-2 control-label">承办单位</label>
+            <div class="col-sm-5">
                 <input type="text" name="cheng" class="form-control" id="input3"  value="${game.cheng}">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="input4" class="col-sm-1 control-label">场次数量</label>
-            <div class="col-sm-10">
+            <label for="input4" class="col-sm-2 control-label">场次数量</label>
+            <div class="col-sm-5">
                 <input type="text" name="chang" class="form-control" id="input4"  value="${game.chang}">
             </div>
         </div>
         <div class="form-group">
-            <label for="input5" class="col-sm-1 control-label">钓区数量</label>
-            <div class="col-sm-10">
+            <label for="input5" class="col-sm-2 control-label">钓区数量</label>
+            <div class="col-sm-5">
                 <input type="text" name="qu" class="form-control" id="input5"  value="${game.qu}">
             </div>
         </div>
 
         <div class="form-group">
-            <label for="input6" class="col-sm-1 control-label">备注</label>
-            <div class="col-sm-10">
+            <label for="input6" class="col-sm-2 control-label">备注</label>
+            <div class="col-sm-5">
                 <input type="text" name="intro" class="form-control" id="input6"  value="${game.intro}">
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-sm-offset-1 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-5">
                 <button type="button" class="btn btn-success" onclick="update()">修改</button>
                 <button type="button" style="margin-left: 50px;" class="btn btn-danger" onclick="save()">清空并新建比赛</button>
                 <button type="button" style="margin-left: 50px;" class="btn btn-info" onclick="window.print()">打印</button>
