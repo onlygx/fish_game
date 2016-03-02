@@ -28,7 +28,7 @@ public interface GradeMapper {
 
     List<Grade> gradeShow(@Param("gameId") Long gameId,@Param("chang") Integer chang,@Param("qu") Integer qu);
 
-    List<Grade> jifen(@Param("gameId") Long gameId,@Param("chang") Integer chang);
+    List<Grade> jifen(@Param("gameId") Long gameId,@Param("chang") Integer chang,@Param("qu") Integer qu);
 
     List<Grade> zongfenShow(@Param("gameId") Long gameId);
 

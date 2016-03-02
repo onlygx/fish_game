@@ -92,14 +92,18 @@
 </html>
 <script>
 
+    function getAllChecked(){
+        var arrays = new Array();
+        $('input[name="persons"]:checked').each(function(){
+            arrays.push($(this).val());
+        });
+        return arrays
+    }
+
     function luck(){
         $("#luckyTable").html("");
-        var pers = new Array();
-        $('input[name="persons"]:checked').each(function(){
-            pers.push($(this).val());
-        });
+
         var luckyCount = 1;
-        var zhongjiang = new Array();
         try{
             luckyCount = parseInt($("#chouCount").val());
 
@@ -107,17 +111,18 @@
             luckyCount = 1;
         }
         for(var i = 0 ;i<luckyCount;i++){
-            var random = parseInt(Math.random()*pers.length);
-            var id = pers[random];
-            var name = $("#n_"+id).text();
-            $("#p_"+id).attr("checked",false);
-            intoLuckyTable(name);
+            var arrays = getAllChecked()
+            var random = parseInt(Math.random()*arrays.length);
+            var id = arrays[random];
+            intoLuckyTable(id);
         }
         $("#modeshow").click();
         //alert("中奖用户："+zhongjiang.join(","));
     }
 
-    function intoLuckyTable(name){
+    function intoLuckyTable(id){
+        var name = $("#n_"+id).text();
+        $("#p_"+id).attr("checked",false);
 
         var tr = $("<tr>");
         var td = $("<td align='center'>");

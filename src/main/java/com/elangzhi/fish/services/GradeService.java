@@ -20,7 +20,7 @@ public interface GradeService extends BaseService<Grade> {
 
     List<Grade> gradeShow(Long gameId, Integer chang, Integer qu);
 
-    List<Grade> jifen(Long gameId, Integer chang);
+    List<Grade> jifen(Long gameId, Integer chang,Integer qu);
 
     Grade findByChangNumber(Long gameId,Integer chang, Long personId);
 

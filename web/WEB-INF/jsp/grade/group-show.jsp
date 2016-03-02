@@ -44,10 +44,10 @@
         <c:forEach var="item" items="${grades}" varStatus="status">
             <tr>
                 <td>${item.personName}</td>
-                <td>${item.number}</td>
-                <td>${item.weight}</td>
-                <td>${item.grade}</td>
-                <td>${item.ranking}</td>
+                <td>${item.number==0?"":item.number}</td>
+                <td>${item.weight==0?"":item.weight}</td>
+                <td>${item.grade==0?"":item.grade}</td>
+                <td>${item.ranking==0?"":item.ranking}</td>
                 <td>${item.defen}</td>
                 <td>${status.count}</td>
             </tr>

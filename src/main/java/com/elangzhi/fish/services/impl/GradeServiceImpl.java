@@ -77,8 +77,8 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public List<Grade> jifen(Long gameId,Integer chang) {
-        return gradeMapper.jifen(gameId,chang);
+    public List<Grade> jifen(Long gameId,Integer chang,Integer qu) {
+        return gradeMapper.jifen(gameId,chang,qu);
     }
 
     @Override

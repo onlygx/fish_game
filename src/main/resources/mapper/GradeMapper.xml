@@ -237,12 +237,25 @@
 
 
     <select id="zongfenShow" resultType="com.elangzhi.fish.model.Grade">
-        select a.person_id personId,sum(a.ranking) ranking,sum(a.grade)+sum(a.ranking) defen,b.`name` personName,b.number personNumber
+        select a.person_id personId,grade1.grade grade1,grade2.grade grade2,grade3.grade grade3,grade4.grade grade4,
+        sum(a.ranking) ranking,sum(a.grade)+sum(a.ranking) defen,b.`name` personName,b.number personNumber
         from grade a
+        left join(
+            select person_id,grade from grade where game_id = #{gameId,jdbcType=BIGINT} and chang = 1
+        ) grade1 on a.person_id = grade1.person_id
+        left join(
+            select person_id,grade from grade where game_id = #{gameId,jdbcType=BIGINT} and chang = 2
+        ) grade2 on a.person_id = grade2.person_id
+        left join(
+            select person_id,grade from grade where game_id = #{gameId,jdbcType=BIGINT} and chang = 3
+        ) grade3 on a.person_id = grade3.person_id
+        left join(
+            select person_id,grade from grade where game_id = #{gameId,jdbcType=BIGINT} and chang = 4
+        ) grade4 on a.person_id = grade4.person_id
         left join person b on a.person_id = b.id
         where a.game_id = #{gameId,jdbcType=BIGINT}
         group by a.person_id
-        order by defen
+        order by defen,grade1,grade2,grade3,grade4
     </select>
 
 
@@ -254,6 +267,9 @@
         and a.game_id = #{gameId,jdbcType=BIGINT}
         <if test="chang != null" >
             and a.chang = #{chang,jdbcType=INTEGER}
+            <if test="qu != null" >
+              and a.`qu` = #{qu,jdbcType=INTEGER}
+            </if>
         </if>
         order by a.number desc,a.weight desc,a.room
     </select>

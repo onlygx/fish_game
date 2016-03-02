@@ -27,56 +27,58 @@ public class GradeController {
 
     @RequestMapping("/jifen/{gameId}")
     @ResponseBody
-    public Tip jifen(@PathVariable Long gameId,ModelMap model){
+    public Tip jifen(@PathVariable Long gameId,ModelMap model) {
+        Game game = gameService.findById(gameId);
         try {
-            Game game = gameService.findById(gameId);
             for(int i = 1 ;i<=game.getChang();i++){
-                List<Grade> grades = gradeService.jifen(gameId,i);
-                //初始化
-                for(int j = 0;j<grades.size() ; j ++){
-                    grades.get(j).setGrade(j+1.0);
-                }
-
-                for(int j = 0;j<grades.size() ; j ++){
-
-                    List<Grade> temp = new ArrayList<>();
-                    temp.add(grades.get(j));
-                    for(int s = 0;s<grades.size() ; s ++){
-                        if(grades.get(j).equals(grades.get(s))){
-                            continue;
-                        }
-                        if(grades.get(0).getNumber() != null && grades.get(0).getNumber() != 0 ){
-                            if(grades.get(s).getNumber() == grades.get(j).getNumber()){
-                                temp.add(grades.get(s));
-                                grades.remove(grades.get(s));
-                                s--;
-                            }
-                        }else{
-                            if(grades.get(s).getWeight() == grades.get(j).getWeight()){
-                                temp.add(grades.get(s));
-                                grades.remove(grades.get(s));
-                                s--;
-                            }
-                        }
-
+                for(int j = 1 ;j<=game.getQu();j++){
+                    List<Grade> grades = gradeService.jifen(gameId,i,j);
+                    //初始化
+                    for(int r = 0;r<grades.size() ; r ++){
+                        grades.get(r).setGrade(r+1.0);
                     }
-                    Double grade = 0.0;
-                    for(Grade g : temp){
-                        grade += g.getGrade();
-                    }
-                    for(Grade g : temp){
-                        g.setGrade(grade/temp.size());
-                        gradeService.updateById(g);
+                    if(grades != null){
+                        for(int x = 0;x<grades.size();x++){
+
+                            List<Grade> temp = new ArrayList<>();
+                            temp.add(grades.get(x));
+                            for(int s = 0;s<grades.size() ; s ++){
+                                if(grades.get(x).equals(grades.get(s))){
+                                    continue;
+                                }
+                                if(grades.get(0).getNumber() != null && grades.get(0).getNumber() != 0 ){
+                                    if(grades.get(s).getNumber() == grades.get(x).getNumber()){
+                                        temp.add(grades.get(s));
+                                        grades.remove(grades.get(s));
+                                        s--;
+                                    }
+                                }else{
+                                    if(grades.get(s).getWeight() == grades.get(x).getWeight()){
+                                        temp.add(grades.get(s));
+                                        grades.remove(grades.get(s));
+                                        s--;
+                                    }
+                                }
+
+                            }
+                            Double grade = 0.0;
+                            for(Grade g : temp){
+                                grade += g.getGrade();
+                            }
+                            for(Grade g : temp){
+                                g.setGrade(grade/temp.size());
+                                gradeService.updateById(g);
+                            }
+                        }
                     }
                 }
             }
             return new Tip();
         } catch (Exception e) {
             e.printStackTrace();
-            return new Tip(1);
         }
+        return new Tip(1);
     }
-
 
     @RequestMapping("/fafen")
     @ResponseBody

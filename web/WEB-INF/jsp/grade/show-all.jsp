@@ -46,10 +46,10 @@
                 <td>${item.personNumber}</td>
                 <td>${item.personName}</td>
                 <c:forEach var="item2" items="${item.child}" varStatus="status2">
-                    <td>${item2.grade}</td>
+                    <td>${item2.grade==0?"":item2.grade}</td>
                 </c:forEach>
-                <td>${item.ranking}</td>
-                <td>${item.defen}</td>
+                <td>${item.ranking==0?"":item.ranking}</td>
+                <td>${item.defen==0?"":item.defen}</td>
                 <td>${status.count}</td>
             </tr>
         </c:forEach>

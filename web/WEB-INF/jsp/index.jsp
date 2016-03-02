@@ -159,7 +159,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel2">成绩打印 <a href="#" onclick="jifen()">开始/重新计分</a></h4>
+                <h4 class="modal-title" id="myModalLabel2">成绩打印 <a class="btn btn-danger" href="#" onclick="jifen()">计分排名</a></h4>
 
             </div>
             <div class="modal-body">

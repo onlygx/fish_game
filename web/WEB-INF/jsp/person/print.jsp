@@ -27,14 +27,14 @@
 <body>
 <jsp:include page="../navbar.jsp"></jsp:include>
 
-<div class="container"  align="center" style="margin-top: 80px;">
-    <div class="row"  style="margin-top: 70%;width: 230px;">
+<div class="container"  align="center">
+    <div class="row"  style="margin-top: 20%;width: 100px;">
 
         <div  align="left" style="font-family: 黑体;font-weight: bold;">
-            <h1>编号：${obj.number}</h1>
-            <h1>姓名：${obj.name}</h1>
+            <h5>编号：${obj.number}</h5>
+            <h5>姓名：${obj.name}</h5>
         </div>
-        <div  style="margin-top: 50px;">
+        <div  style="margin-top: 20px;">
             <div id="erweima"></div>
         </div>
 
@@ -47,8 +47,8 @@
     (function($){
         jQuery('#erweima').qrcode({
             text : "${obj.id}",
-            width:230,
-            height:230
+            width:100,
+            height:100
         });
         window.print();
     })(jQuery);

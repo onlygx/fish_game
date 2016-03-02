@@ -49,8 +49,8 @@
                 <td>${item.personNumber}</td>
                 <td>${item.personName}</td>
                 <td>${item.room}</td>
-                <td>${item.number}</td>
-                <td>${item.weight}</td>
+                <td>${item.number==0?"":item.number}</td>
+                <td>${item.weight==0?"":item.weight}</td>
                 <td> </td>
                 <td> </td>
                 <td> </td>
