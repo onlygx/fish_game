@@ -39,22 +39,21 @@
     <table style="width: 100%;margin-top: 20px; " class="table table-striped table-bordered">
         <tr>
             <th>选择</th>
-            <th>编号</th>
             <th>姓名</th>
-            <th>电话</th>
-            <th>队伍</th>
-            <th>备注</th>
+            <th>编号</th>
+            <th>得分</th>
+            <th>顺序</th>
         </tr>
         <c:forEach var="item" items="${persons}" varStatus="status">
             <tr >
                 <td>
-                    <input type="checkbox" id="p_${item.id}" checked name="persons" value="${item.id}">
+                    <input type="checkbox" id="p_${item.personId}" checked name="persons" value="${item.personId}">
+                    ${item.personId}
                 </td>
-                <td>${item.number}</td>
-                <td id="n_${item.id}">${item.name}</td>
-                <td>${item.phone}</td>
-                <td>${item.group}</td>
-                <td>${item.intro}</td>
+                <td id="n_${item.personId}">${item.personName}</td>
+                <td>${item.personNumber}</td>
+                <td>${item.defen+item.ranking}</td>
+                <td>${status.count}</td>
             </tr>
         </c:forEach>
 

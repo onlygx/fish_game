@@ -37,7 +37,6 @@
         <tr>
             <th>编号</th>
             <th>姓名</th>
-            <th>钓位</th>
             <th>尾数</th>
             <th>重量</th>
             <th>计分</th>
@@ -49,7 +48,6 @@
             <tr>
                 <td>${item.personNumber}</td>
                 <td>${item.personName}</td>
-                <td>${item.room}</td>
                 <td>${item.number==0?"":item.number}</td>
                 <td>${item.weight==0?"":item.weight}</td>
                 <td>${item.grade}</td>

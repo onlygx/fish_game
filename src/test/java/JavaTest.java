@@ -7,10 +7,10 @@ import java.util.Random;
  */
 public class JavaTest {
     public static void main(String[] args) {
-        int i = 1;
-        if(i==1 || i==5){
-            System.out.println("success");
+        long start = 100;
+        for(int i = 1 ;i <= 52 ;i++){
+            start += start * 0.3;
+            System.out.println("第"+i+"周:"+start);
         }
-        System.out.println("error");
     }
 }

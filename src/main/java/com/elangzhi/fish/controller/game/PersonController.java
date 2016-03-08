@@ -77,7 +77,6 @@ public class PersonController {
             e.printStackTrace();
         }
 
-
         return null;
     }
 
@@ -133,7 +132,7 @@ public class PersonController {
     @RequestMapping("/lucky/{id}")
     public ModelAndView lucky(@PathVariable Long id, HttpServletRequest request, ModelMap model){
 
-        model.put("persons",personService.listByGame(id));
+        model.put("persons",gradeService.zongfenShow(id));
 
         return new ModelAndView("person/lucky",model);
     }

@@ -35,17 +35,21 @@ public class GradeController {
                     List<Grade> grades = gradeService.jifen(gameId,i,j);
                     //初始化
                     for(int r = 0;r<grades.size() ; r ++){
+
                         grades.get(r).setGrade(r+1.0);
                     }
                     if(grades != null){
                         for(int x = 0;x<grades.size();x++){
-
+                            if(i==1 && j == 5){
+                                System.out.println("test");
+                            }
                             List<Grade> temp = new ArrayList<>();
                             temp.add(grades.get(x));
                             for(int s = 0;s<grades.size() ; s ++){
                                 if(grades.get(x).equals(grades.get(s))){
                                     continue;
                                 }
+
                                 if(grades.get(0).getNumber() != null && grades.get(0).getNumber() != 0 ){
                                     if(grades.get(s).getNumber() == grades.get(x).getNumber()){
                                         temp.add(grades.get(s));
@@ -53,7 +57,7 @@ public class GradeController {
                                         s--;
                                     }
                                 }else{
-                                    if(grades.get(s).getWeight() == grades.get(x).getWeight()){
+                                    if(grades.get(s).getWeight().equals(grades.get(x).getWeight())){
                                         temp.add(grades.get(s));
                                         grades.remove(grades.get(s));
                                         s--;

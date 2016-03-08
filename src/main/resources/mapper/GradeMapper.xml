@@ -237,27 +237,28 @@
 
 
     <select id="zongfenShow" resultType="com.elangzhi.fish.model.Grade">
-        select a.person_id personId,grade1.grade grade1,grade2.grade grade2,grade3.grade grade3,grade4.grade grade4,
+
+		select a.person_id personId,fuben.grade fubenfen,
         sum(a.ranking) ranking,sum(a.grade)+sum(a.ranking) defen,b.`name` personName,b.number personNumber
         from grade a
         left join(
-            select person_id,grade from grade where game_id = #{gameId,jdbcType=BIGINT} and chang = 1
-        ) grade1 on a.person_id = grade1.person_id
-        left join(
-            select person_id,grade from grade where game_id = #{gameId,jdbcType=BIGINT} and chang = 2
-        ) grade2 on a.person_id = grade2.person_id
-        left join(
-            select person_id,grade from grade where game_id = #{gameId,jdbcType=BIGINT} and chang = 3
-        ) grade3 on a.person_id = grade3.person_id
-        left join(
-            select person_id,grade from grade where game_id = #{gameId,jdbcType=BIGINT} and chang = 4
-        ) grade4 on a.person_id = grade4.person_id
-        left join person b on a.person_id = b.id
-        where a.game_id = #{gameId,jdbcType=BIGINT}
-        group by a.person_id
-        order by defen,grade1,grade2,grade3,grade4
-    </select>
+            select a.person_id,a.grade
+						from (
+							select *
+							from grade
+							where game_id =  #{gameId,jdbcType=BIGINT}
+							order by person_id,grade
+						) a
+						group by a.person_id
+						order by a.grade
+        ) fuben on a.person_id = fuben.person_id
 
+        left join person b on a.person_id = b.id
+        where a.game_id =  #{gameId,jdbcType=BIGINT}
+        group by a.person_id
+        order by defen,fubenfen
+
+    </select>
 
     <select id="jifen" resultType="com.elangzhi.fish.model.Grade">
         select a.*,b.`name` personName,b.number personNumber
