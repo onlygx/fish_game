@@ -37,6 +37,16 @@ public class GradeController {
                     for(int r = 0;r<grades.size() ; r ++){
 
                         grades.get(r).setGrade(r+1.0);
+                        if(grades.get(0).getNumber() != null && grades.get(0).getNumber() != 0 ){
+                            if(grades.get(r).getNumber() == 0){
+                                grades.get(r).setGrade(grades.size()+1.0);
+                            }
+                        }else{
+                            if(grades.get(r).getWeight() == 0){
+                                grades.get(r).setGrade(grades.size()+1.0);
+                            }
+                        }
+
                     }
                     if(grades != null){
                         for(int x = 0;x<grades.size();x++){
