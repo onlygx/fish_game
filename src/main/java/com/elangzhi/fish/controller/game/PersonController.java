@@ -132,7 +132,20 @@ public class PersonController {
     @RequestMapping("/lucky/{id}")
     public ModelAndView lucky(@PathVariable Long id, HttpServletRequest request, ModelMap model){
 
-        model.put("persons",gradeService.zongfenShow(id));
+        List<Person> persons = personService.listByGame(id);
+        List<Grade> grades = gradeService.zongfenShow(id);
+        for(Person p : persons){
+            if(p.getType() != 20){
+                Grade g = new Grade();
+                g.setPersonName(p.getName());
+                g.setPersonId(p.getId());
+                g.setPersonNumber(p.getNumber());
+                g.setDefen(0.0);
+                g.setRanking(0.0);
+                grades.add(g);
+            }
+        }
+        model.put("persons",grades);
 
         return new ModelAndView("person/lucky",model);
     }

@@ -29,6 +29,9 @@ public class GradeController {
     @ResponseBody
     public Tip jifen(@PathVariable Long gameId,ModelMap model) {
         Game game = gameService.findById(gameId);
+        List<Person> persons = personService.listByGame(game.getId());
+        Integer count = persons.size();
+        Integer max = count/game.getQu()+1;
         try {
             for(int i = 1 ;i<=game.getChang();i++){
                 for(int j = 1 ;j<=game.getQu();j++){
@@ -39,11 +42,11 @@ public class GradeController {
                         grades.get(r).setGrade(r+1.0);
                         if(grades.get(0).getNumber() != null && grades.get(0).getNumber() != 0 ){
                             if(grades.get(r).getNumber() == 0){
-                                grades.get(r).setGrade(grades.size()+1.0);
+                                grades.get(r).setGrade(max+0.0);
                             }
                         }else{
                             if(grades.get(r).getWeight() == 0){
-                                grades.get(r).setGrade(grades.size()+1.0);
+                                grades.get(r).setGrade(max+0.0);
                             }
                         }
 
