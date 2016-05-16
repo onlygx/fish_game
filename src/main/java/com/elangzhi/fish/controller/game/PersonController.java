@@ -98,7 +98,7 @@ public class PersonController {
     private void addHaos(Game game) {
         haos = new ArrayList<Integer>();
         Integer qu = game.getQu();
-        List<Person> persons = personService.listByGame(game.getId());
+        List<Person> persons = personService.listByGameType(game.getId(),20);
         Integer count = persons.size();
         Integer max = count/qu+1;
         for(int i = 1; i < qu+1 ; i ++){
