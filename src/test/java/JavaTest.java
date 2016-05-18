@@ -8,9 +8,10 @@ import java.util.Random;
 public class JavaTest {
     public static void main(String[] args) {
         long start = 100;
-        for(int i = 1 ;i <= 52 ;i++){
-            start += start * 0.3;
-            System.out.println("第"+i+"周:"+start);
+        for(int i = 1 ;i <= 10 ;i++){
+            if(i == 10){
+                System.out.println(i);
+            }
         }
     }
 }

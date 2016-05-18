@@ -27,7 +27,11 @@ import java.util.Random;
 @Controller
 @RequestMapping("/person")
 public class PersonController {
+
+    //基本号码池
     private List<Integer> haos;
+    //超出位置号码池
+    private List<Integer> haosOut;
 
     @RequestMapping("/setting")
     public ModelAndView setting(ModelMap model){
@@ -61,17 +65,22 @@ public class PersonController {
         if(haos == null){
             addHaos(game);
         }
-        if(haos.size() == 0){
-            return null;
-        }
-        Person person = personService.findById(id);
-        int qu = 0,room = 0;
+
+        int qu = 0,room = 0,randNum,roomValue;
         try {
-            int randNum = getRandom(haos.size());
-            int roomValue = haos.get(randNum);
-            haos.remove(randNum);
+            if(haos.size() > 0){
+                randNum = getRandom(haos.size());
+                roomValue = haos.get(randNum);
+                haos.remove(randNum);
+            }else{
+                randNum = getRandom(haosOut.size());
+                roomValue = haosOut.get(randNum);
+                haosOut.remove(randNum);
+            }
             qu = roomValue/1000;
             room = roomValue%1000;
+
+            Person person = personService.findById(id);
             return addGrade(game.getId(),id,qu,room,person);
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,13 +106,34 @@ public class PersonController {
      */
     private void addHaos(Game game) {
         haos = new ArrayList<Integer>();
+        haosOut = new ArrayList<Integer>();
         Integer qu = game.getQu();
         List<Person> persons = personService.listByGameType(game.getId(),20);
         Integer count = persons.size();
-        Integer max = count/qu+1;
-        for(int i = 1; i < qu+1 ; i ++){
-            for(int j = 1; j < max+1 ;j++){
-                haos.add(i*1000+j);
+
+        haoPool(count,qu);
+
+    }
+
+    /**
+     * 初始化钓位，以供抽取
+     * @param count
+     * @param qu
+     */
+    public void haoPool(Integer count,Integer qu){
+
+        Integer max = count/qu;
+        if(count % qu != 0){
+            max ++;
+        }
+        for(int i = 1; i <= qu ; i ++){
+            for(int j = 1; j <= max ;j++){
+                int number = i*1000+j;
+                if(j == max){
+                    haosOut.add(number);
+                }else{
+                    haos.add(number);
+                }
             }
         }
     }
@@ -117,6 +147,10 @@ public class PersonController {
         grade.setRoom(number);
         grade.setPersonName(person.getName());
         grade.setPersonNumber(person.getNumber());
+        Grade isNull = gradeService.findByChangNumber(gameId,1,personId);
+        if(isNull != null){
+            return isNull;
+        }
         gradeService.save(grade);
         return grade;
     }

@@ -83,7 +83,7 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public Grade findByChangNumber(Long gameId,Integer chang, Long personId) {
-        List<Grade> gradeList = gradeMapper.findByChangNumber(gameId,chang,personId);
+        List<Grade> gradeList = gradeMapper.findByGameChangPerson(gameId,chang,personId);
         if(gradeList.size() > 0){
             return gradeList.get(0);
         }

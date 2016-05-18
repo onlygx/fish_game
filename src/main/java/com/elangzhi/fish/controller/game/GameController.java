@@ -54,7 +54,7 @@ public class GameController {
     @ResponseBody
     public List<Person> downUser(){
         Game game = gameService.findNew();
-        List<Person> personList = personService.listByGame(game.getId());
+        List<Person> personList = personService.listByGameType(game.getId(),20);
         return personList;
     }
 
