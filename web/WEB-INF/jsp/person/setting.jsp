@@ -87,10 +87,10 @@
             <th>编号</th>
             <th>姓名</th>
             <th>电话</th>
-            <th>地址</th>
+<%--            <th>地址</th>
             <th>报名费</th>
             <th>队伍</th>
-            <th>备注</th>
+            <th>备注</th>--%>
             <th>操作</th>
         </tr>
         <c:forEach var="item" items="${persons}" varStatus="status">
@@ -98,10 +98,10 @@
                 <td>${item.number}</td>
                 <td>${item.name}</td>
                 <td>${item.phone}</td>
-                <td>${item.address}</td>
+<%--                <td>${item.address}</td>
                 <td>${item.price}</td>
                 <td>${item.group}</td>
-                <td>${item.intro}</td>
+                <td>${item.intro}</td>--%>
                 <td>
                     <a href="javascript:void(0);" onclick="del('${item.id}')">删除</a>
                     <a href="/person/print/${item.id}"  target="_blank">查看/打印</a>

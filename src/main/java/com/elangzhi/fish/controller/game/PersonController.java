@@ -7,16 +7,13 @@ import com.elangzhi.fish.model.Person;
 import com.elangzhi.fish.services.GameService;
 import com.elangzhi.fish.services.GradeService;
 import com.elangzhi.fish.services.PersonService;
-import com.elangzhi.fish.tools.UUIDFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -65,17 +62,25 @@ public class PersonController {
         if(haos == null){
             addHaos(game);
         }
-
+        Grade isNull = gradeService.findByGameChangPerson(game.getId(),1,id);
+        if(isNull != null){
+            return isNull;
+        }
         int qu = 0,room = 0,randNum,roomValue;
         try {
             if(haos.size() > 0){
                 randNum = getRandom(haos.size());
                 roomValue = haos.get(randNum);
                 haos.remove(randNum);
-            }else{
+            }else if(haosOut.size() > 0){
                 randNum = getRandom(haosOut.size());
                 roomValue = haosOut.get(randNum);
                 haosOut.remove(randNum);
+            }else{
+                Grade grade = new Grade();
+                grade.setChang(1);
+                grade.setPersonName("号码池已无数据！");
+                return grade;
             }
             qu = roomValue/1000;
             room = roomValue%1000;
@@ -147,10 +152,7 @@ public class PersonController {
         grade.setRoom(number);
         grade.setPersonName(person.getName());
         grade.setPersonNumber(person.getNumber());
-        Grade isNull = gradeService.findByChangNumber(gameId,1,personId);
-        if(isNull != null){
-            return isNull;
-        }
+
         gradeService.save(grade);
         return grade;
     }

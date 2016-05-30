@@ -26,7 +26,7 @@
 <body style="background-color: #dca7a7;">
 <jsp:include page="../navbar.jsp"></jsp:include>
 
-<div class="container"  align="center" style="margin-top: 80px;">
+<div class="container"  align="center" >
     <h3>
         第 ${chang} 场
         <c:if test="${qu != null}">
